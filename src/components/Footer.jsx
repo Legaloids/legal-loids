@@ -35,59 +35,63 @@ const Footer = () => {
   }, []);
 
   return (
-    <footer ref={footerRef} className="bg-gray-900 text-gray-300 py-16">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+    <footer ref={footerRef} className="bg-gray-900 text-gray-300 py-20">
+      <div className="container mx-auto px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16 mb-16">
           <div ref={(el) => (sectionsRef.current[0] = el)}>
-            <h4 className="text-2xl font-bold text-white mb-4">Lawfirm</h4>
-            <p className="text-gray-400 leading-relaxed">
-              Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the
-              blind texts.
+            <h4 className="text-2xl font-bold text-white mb-6 tracking-tight">Legaloids Law Firm</h4>
+            <p className="text-gray-400 leading-relaxed text-sm">
+              A premier law firm committed to delivering exceptional legal services with integrity, expertise, and strategic thinking. We protect your interests and guide you toward success.
             </p>
           </div>
 
           <div ref={(el) => (sectionsRef.current[1] = el)}>
-            <h4 className="text-xl font-semibold text-white mb-4">Navigation</h4>
-            <ul className="space-y-2">
+            <h4 className="text-lg font-semibold text-white mb-6 uppercase tracking-wider text-sm">Navigation</h4>
+            <ul className="space-y-3">
               <li>
-                <Link to="/" className="hover:text-primary-400 transition-colors duration-200">
+                <Link to="/" className="text-sm hover:text-primary-400 transition-colors duration-200 block">
                   Home
                 </Link>
               </li>
               <li>
-                <Link to="/practice" className="hover:text-primary-400 transition-colors duration-200">
+                <Link to="/practice" className="text-sm hover:text-primary-400 transition-colors duration-200 block">
                   Practice Areas
                 </Link>
               </li>
               <li>
-                <Link to="/won" className="hover:text-primary-400 transition-colors duration-200">
-                  Won Cases
+                <Link to="/expertise" className="text-sm hover:text-primary-400 transition-colors duration-200 block">
+                  Expertise
                 </Link>
               </li>
               <li>
-                <Link to="/blog" className="hover:text-primary-400 transition-colors duration-200">
+                <Link to="/people" className="text-sm hover:text-primary-400 transition-colors duration-200 block">
+                  People
+                </Link>
+              </li>
+              <li>
+                <Link to="/blog" className="text-sm hover:text-primary-400 transition-colors duration-200 block">
                   Blog
                 </Link>
               </li>
               <li>
-                <Link to="/about" className="hover:text-primary-400 transition-colors duration-200">
-                  About us
+                <Link to="/about" className="text-sm hover:text-primary-400 transition-colors duration-200 block">
+                  About Us
                 </Link>
               </li>
             </ul>
           </div>
 
           <div ref={(el) => (sectionsRef.current[2] = el)}>
-            <h4 className="text-xl font-semibold text-white mb-4">Contact Information</h4>
-            <ul className="space-y-2 text-gray-400">
-              <li>198 West 21th Street, <br /> Suite 721 New York NY 10016</li>
+            <h4 className="text-lg font-semibold text-white mb-6 uppercase tracking-wider text-sm">Contact Information</h4>
+            <ul className="space-y-3 text-gray-400 text-sm">
+              <li className="leading-relaxed">198 West 21th Street, <br /> Suite 721 New York NY 10016</li>
               <li>
-                <a href="tel:+1235235598" className="hover:text-primary-400 transition-colors duration-200">
+                <a href="tel:+1235235598" className="hover:text-primary-400 transition-colors duration-200 block">
                   + 1235 2355 98
                 </a>
               </li>
               <li>
-                <a href="mailto:info@yoursite.com" className="hover:text-primary-400 transition-colors duration-200">
+                <a href="mailto:info@yoursite.com" className="hover:text-primary-400 transition-colors duration-200 block">
                   info@yoursite.com
                 </a>
               </li>
@@ -95,34 +99,30 @@ const Footer = () => {
           </div>
 
           <div ref={(el) => (sectionsRef.current[3] = el)}>
-            <h4 className="text-xl font-semibold text-white mb-4">Opening Hours</h4>
-            <ul className="space-y-2 text-gray-400">
-              <li>Mon - Thu: 9:00 - 21:00</li>
-              <li>Fri: 8:00 - 21:00</li>
-              <li>Sat: 9:30 - 15:00</li>
+            <h4 className="text-lg font-semibold text-white mb-6 uppercase tracking-wider text-sm">Office Hours</h4>
+            <ul className="space-y-3 text-gray-400 text-sm">
+              <li>Monday - Thursday: 9:00 AM - 9:00 PM</li>
+              <li>Friday: 8:00 AM - 9:00 PM</li>
+              <li>Saturday: 9:30 AM - 3:00 PM</li>
             </ul>
           </div>
         </div>
 
-        <div className="border-t border-gray-800 pt-8">
+        <div className="border-t border-gray-800/50 pt-10">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <p className="text-gray-400 text-center md:text-left">
-              Copyright &copy; {currentYear} All rights reserved | This template is made with{' '}
-              <span className="text-primary-500">❤</span> by{' '}
-              <a href="https://colorlib.com" target="_blank" rel="noopener noreferrer" className="text-primary-400 hover:text-primary-300">
-                Colorlib
-              </a>
+            <p className="text-gray-400 text-sm text-center md:text-left">
+              Copyright &copy; {currentYear} Legaloids Law Firm. All rights reserved.
             </p>
-            <div className="flex space-x-4">
-              {['Twitter', 'Facebook', 'LinkedIn', 'Dribbble'].map((social, index) => (
+            <div className="flex space-x-3">
+              {['Twitter', 'Facebook', 'LinkedIn', 'Instagram'].map((social, index) => (
                 <a
                   key={index}
                   href="#!"
                   onClick={(e) => e.preventDefault()}
-                  className="w-10 h-10 bg-gray-800 hover:bg-primary-600 rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110 hover:rotate-360"
+                  className="w-9 h-9 bg-gray-800 hover:bg-primary-600 rounded-md flex items-center justify-center transition-all duration-300 transform hover:scale-105"
                   aria-label={social}
                 >
-                  <span className="text-gray-400 hover:text-white transition-colors">
+                  <span className="text-gray-400 hover:text-white transition-colors text-xs font-semibold">
                     {social[0]}
                   </span>
                 </a>

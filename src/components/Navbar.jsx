@@ -133,31 +133,31 @@ const Navbar = () => {
   return (
     <>
       {/* Fixed Header with Logo, Search, and Toggle */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm shadow-md border-b border-gray-200">
-        <div className="container mx-auto px-4 py-4">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/98 backdrop-blur-md shadow-sm border-b border-gray-100">
+        <div className="container mx-auto px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <Link
               to="/"
-              className="text-2xl font-bold text-primary-600 hover:text-primary-700 transition-colors duration-300"
+              className="text-2xl lg:text-3xl font-bold text-primary-600 hover:text-primary-700 transition-colors duration-300 tracking-tight"
               onMouseEnter={(e) => {
-                gsap.to(e.target, { scale: 1.05, duration: 0.3, ease: 'power2.out' });
+                gsap.to(e.target, { scale: 1.02, duration: 0.3, ease: 'power2.out' });
               }}
               onMouseLeave={(e) => {
                 gsap.to(e.target, { scale: 1, duration: 0.3, ease: 'power2.out' });
               }}
             >
-              Lawmaker
+              Legaloids
             </Link>
 
             <div className="flex items-center gap-4">
               {/* Search Button */}
               <button
                 onClick={toggleSearch}
-                className="w-10 h-10 flex items-center justify-center text-gray-600 hover:text-primary-600 hover:bg-gray-100 rounded-full transition-all duration-300"
+                className="w-10 h-10 flex items-center justify-center text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-lg transition-all duration-300"
                 aria-label="Search"
               >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                 </svg>
               </button>
 
@@ -165,7 +165,7 @@ const Navbar = () => {
               <button
                 ref={toggleButtonRef}
                 onClick={toggleMenu}
-                className="relative z-50 w-12 h-12 flex items-center justify-center bg-primary-600 hover:bg-primary-700 rounded-full transition-colors duration-300 shadow-lg hover:shadow-xl"
+                className="relative z-50 w-11 h-11 flex items-center justify-center bg-primary-600 hover:bg-primary-700 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg"
                 aria-label="Toggle menu"
               >
                 <div className="w-6 h-6 relative">
@@ -193,38 +193,38 @@ const Navbar = () => {
 
       {/* Search Overlay */}
       {isSearchOpen && (
-        <div className="fixed inset-0 bg-black/50 z-[60] flex items-start justify-center pt-32 px-4">
+        <div className="fixed inset-0 bg-black/60 z-[60] flex items-start justify-center pt-32 px-4 backdrop-blur-sm">
           <div
             ref={searchRef}
-            className="bg-white rounded-xl shadow-2xl w-full max-w-2xl p-6"
+            className="bg-white rounded-lg shadow-2xl w-full max-w-2xl p-8"
           >
             <form onSubmit={handleSearchSubmit} className="relative">
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search (Minimum 3 characters)..."
-                className="w-full px-6 py-4 pr-12 text-lg border-2 border-gray-300 rounded-lg focus:border-primary-600 focus:ring-2 focus:ring-primary-200 outline-none transition-all"
+                placeholder="Search our website..."
+                className="w-full px-6 py-4 pr-14 text-base border border-gray-300 rounded-md focus:border-primary-600 focus:ring-2 focus:ring-primary-200 outline-none transition-all"
                 minLength={3}
               />
               <button
                 type="submit"
-                className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-primary-600 hover:bg-primary-700 text-white rounded-lg flex items-center justify-center transition-colors"
+                className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-primary-600 hover:bg-primary-700 text-white rounded-md flex items-center justify-center transition-colors"
               >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                 </svg>
               </button>
             </form>
-            <div className="mt-4 text-sm text-gray-500">
+            <div className="mt-6 text-xs text-gray-500 uppercase tracking-wider">
               <p>Filters: All | People | Expertise | Insights | News</p>
             </div>
             <button
               onClick={() => setIsSearchOpen(false)}
-              className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center text-gray-400 hover:text-gray-600"
+              className="absolute top-6 right-6 w-8 h-8 flex items-center justify-center text-gray-400 hover:text-gray-700 transition-colors"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
           </div>
@@ -241,12 +241,12 @@ const Navbar = () => {
       {/* Right Side Navigation Panel */}
       <nav
         ref={menuRef}
-        className={`fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-gradient-to-b from-primary-900 via-primary-800 to-primary-900 shadow-2xl z-50 overflow-y-auto ${
+        className={`fixed top-0 right-0 h-full w-96 max-w-[90vw] bg-gradient-to-b from-primary-900 via-primary-800 to-primary-900 shadow-2xl z-50 overflow-y-auto ${
           isMenuOpen ? '' : 'pointer-events-none'
         }`}
       >
-        <div className="flex flex-col h-full p-8 pt-24">
-          <ul className="space-y-2">
+        <div className="flex flex-col h-full p-10 pt-28">
+          <ul className="space-y-1">
             {menuItems.map((item, index) => (
               <li
                 key={index}
@@ -258,8 +258,8 @@ const Navbar = () => {
                     <Link
                       to={item.path}
                       onClick={closeMenu}
-                      className={`block px-6 py-4 text-white text-lg font-medium rounded-lg transition-all duration-300 hover:bg-primary-700 hover:translate-x-2 hover:shadow-lg ${
-                        isActive(item.path) ? 'bg-primary-700 shadow-lg' : ''
+                      className={`block px-6 py-3.5 text-white text-base font-medium rounded-md transition-all duration-300 hover:bg-primary-700/50 hover:translate-x-1 hover:shadow-md ${
+                        isActive(item.path) ? 'bg-primary-700/60 shadow-md' : ''
                       }`}
                       onMouseEnter={(e) => {
                         gsap.to(e.target, {
@@ -299,8 +299,8 @@ const Navbar = () => {
                   <Link
                     to={item.path}
                     onClick={closeMenu}
-                    className={`block px-6 py-4 text-white text-lg font-medium rounded-lg transition-all duration-300 hover:bg-primary-700 hover:translate-x-2 hover:shadow-lg relative ${
-                      isActive(item.path) ? 'bg-primary-700 shadow-lg' : ''
+                    className={`block px-6 py-3.5 text-white text-base font-medium rounded-md transition-all duration-300 hover:bg-primary-700/50 hover:translate-x-1 hover:shadow-md relative ${
+                      isActive(item.path) ? 'bg-primary-700/60 shadow-md' : ''
                     }`}
                     onMouseEnter={(e) => {
                       gsap.to(e.target, {
@@ -330,17 +330,17 @@ const Navbar = () => {
           </ul>
 
           {/* Contact Info Section */}
-          <div className="mt-auto pt-8 border-t border-primary-700">
-            <div className="space-y-4 text-primary-200">
+          <div className="mt-auto pt-10 border-t border-primary-700/50">
+            <div className="space-y-5 text-primary-200">
               <div>
-                <p className="text-sm font-semibold text-white mb-2">Contact Us</p>
-                <p className="text-sm">198 West 21th Street</p>
-                <p className="text-sm">Suite 721 New York NY 10016</p>
+                <p className="text-sm font-semibold text-white mb-3 tracking-wide uppercase">Contact Us</p>
+                <p className="text-sm leading-relaxed">198 West 21th Street</p>
+                <p className="text-sm leading-relaxed">Suite 721 New York NY 10016</p>
               </div>
               <div>
                 <a
                   href="tel:+1235235598"
-                  className="text-sm hover:text-white transition-colors duration-200 block"
+                  className="text-sm hover:text-white transition-colors duration-200 block mb-1"
                 >
                   + 1235 2355 98
                 </a>

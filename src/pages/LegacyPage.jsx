@@ -22,7 +22,7 @@ const LegacyPage = () => {
   }, []);
 
   const milestones = [
-    { year: '1920', title: 'Foundation', description: 'Lawmaker was founded with a vision to provide exceptional legal services.' },
+    { year: '1920', title: 'Foundation', description: 'Legaloids Law Firm was founded with a vision to provide exceptional legal services.' },
     { year: '1950', title: 'Expansion', description: 'Expanded operations to serve clients across multiple states.' },
     { year: '1980', title: 'International', description: 'Opened international offices and began global practice.' },
     { year: '2000', title: 'Digital Era', description: 'Embraced technology and digital transformation in legal services.' },

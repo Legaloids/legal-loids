@@ -33,7 +33,7 @@ const PeoplePage = () => {
             Home to inspired performances
           </p>
           <p className="text-lg text-gray-300 mt-4 max-w-2xl mx-auto">
-            Leaders and professionals at Lawmaker excel at what they do. Each member of our team is equipped and empowered to deliver exceptional service. Apart from advising clients domestically and globally, we believe in the holistic development of our people for the evolution of the legal profession and community.
+            Leaders and professionals at Legaloids Law Firm excel at what they do. Each member of our team is equipped and empowered to deliver exceptional service. Apart from advising clients domestically and globally, we believe in the holistic development of our people for the evolution of the legal profession and community.
           </p>
         </div>
       </section>

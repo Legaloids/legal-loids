@@ -71,11 +71,12 @@ const Disclaimer = () => {
   if (!showDisclaimer) return null;
 
   return (
-    <div className="fixed inset-0 z-[10000] flex items-center justify-center p-4">
-      {/* Overlay */}
+    <div className="fixed inset-0 z-[10000] flex items-center justify-center p-4 pointer-events-auto">
+      {/* Overlay - non-clickable */}
       <div
         ref={overlayRef}
         className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+        onClick={(e) => e.stopPropagation()}
       ></div>
 
       {/* Modal */}
@@ -99,7 +100,7 @@ const Disclaimer = () => {
             </p>
 
             <p>
-              By accessing this website, <strong>www.lawmaker.com</strong>, you acknowledge and confirm that you are seeking information relating to Lawmaker of your own accord and that there has been no form of solicitation, advertisement or inducement by Lawmaker or its members.
+              By accessing this website, <strong>www.legaloids.com</strong>, you acknowledge and confirm that you are seeking information relating to Legaloids Law Firm of your own accord and that there has been no form of solicitation, advertisement or inducement by Legaloids Law Firm or its members.
             </p>
 
             <p>
@@ -107,11 +108,11 @@ const Disclaimer = () => {
             </p>
 
             <p>
-              <strong>Lawmaker shall not be liable</strong> for consequences of any action taken by relying on the material/information provided on this website.
+              <strong>Legaloids Law Firm shall not be liable</strong> for consequences of any action taken by relying on the material/information provided on this website.
             </p>
 
             <p>
-              The contents of this website are the <strong>intellectual property of Lawmaker</strong>.
+              The contents of this website are the <strong>intellectual property of Legaloids Law Firm</strong>.
             </p>
 
             <div className="bg-primary-50 border-l-4 border-primary-600 p-4 rounded-r-lg mt-6">
@@ -121,13 +122,13 @@ const Disclaimer = () => {
             </div>
           </div>
 
-          {/* Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 mt-8">
+          {/* Button */}
+          <div className="flex justify-center mt-8">
             <button
               onClick={handleAccept}
-              className="flex-1 px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+              className="px-12 py-4 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-md shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-300 uppercase tracking-wide text-sm"
               onMouseEnter={(e) => {
-                gsap.to(e.target, { scale: 1.05, duration: 0.2 });
+                gsap.to(e.target, { scale: 1.02, duration: 0.2 });
               }}
               onMouseLeave={(e) => {
                 gsap.to(e.target, { scale: 1, duration: 0.2 });
@@ -135,16 +136,10 @@ const Disclaimer = () => {
             >
               I Accept
             </button>
-            <button
-              onClick={handleAccept}
-              className="flex-1 px-8 py-4 bg-gray-100 hover:bg-gray-200 text-gray-900 font-semibold rounded-lg shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-300"
-            >
-              Proceed to Website
-            </button>
           </div>
 
           <p className="text-sm text-gray-500 text-center mt-6">
-            Please accept the above to continue
+            You must accept the disclaimer to continue
           </p>
         </div>
       </div>

@@ -44,7 +44,7 @@ const NewsEventsPage = () => {
 
   const news = [
     {
-      title: 'Lawmaker Wins Prestigious Legal Award',
+      title: 'Legaloids Law Firm Wins Prestigious Legal Award',
       date: 'Jan 10, 2024',
       category: 'Awards',
     },

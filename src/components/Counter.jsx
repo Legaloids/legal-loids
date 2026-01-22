@@ -111,12 +111,12 @@ const Counter = () => {
   return (
     <section
       ref={counterRef}
-      className="relative py-20 bg-cover bg-center bg-no-repeat"
+      className="relative py-24 bg-cover bg-center bg-no-repeat"
       style={{ backgroundImage: 'url(/images/blog-4.jpg)' }}
     >
-      <div className="absolute inset-0 bg-primary-900/80"></div>
-      <div className="relative z-10 container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="absolute inset-0 bg-primary-900/85"></div>
+      <div className="relative z-10 container mx-auto px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
           {counters.map((counter, index) => {
             const IconComponent = counter.icon;
             return (
@@ -125,13 +125,13 @@ const Counter = () => {
                 ref={(el) => (itemsRef.current[index] = el)}
                 className="text-center text-white"
               >
-                <div className="flex justify-center mb-4 transform hover:scale-110 transition-transform duration-300">
-                  <IconComponent className="w-16 h-16 text-primary-200" />
+                <div className="flex justify-center mb-6 transform hover:scale-105 transition-transform duration-300">
+                  <IconComponent className="w-14 h-14 text-white/90" strokeWidth={1.5} />
                 </div>
-                <div className="text-5xl md:text-6xl font-bold mb-2 text-primary-200">
+                <div className="text-5xl md:text-6xl lg:text-7xl font-bold mb-3 text-white tracking-tight">
                   {counter.value.toLocaleString()}+
                 </div>
-                <div className="text-lg md:text-xl font-semibold">{counter.label}</div>
+                <div className="text-base md:text-lg font-medium text-white/90 uppercase tracking-wider">{counter.label}</div>
               </div>
             );
           })}

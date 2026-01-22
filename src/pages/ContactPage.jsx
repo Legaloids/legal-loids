@@ -125,7 +125,7 @@ const ContactPage = () => {
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-1">Website</h3>
                     <a href="#!" onClick={(e) => e.preventDefault()} className="text-primary-600 hover:text-primary-700">
-                      lawfirm.com
+                      legaloids.com
                     </a>
                   </div>
                 </div>

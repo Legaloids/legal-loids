@@ -21,7 +21,8 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['Work Sans', 'sans-serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        serif: ['Playfair Display', 'serif'],
       },
       animation: {
         'fade-in': 'fadeIn 0.6s ease-in-out',

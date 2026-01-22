@@ -51,36 +51,42 @@ const Welcome = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-          <div ref={imageRef} className="md:col-span-6">
+    <section ref={sectionRef} className="py-24 bg-white">
+      <div className="container mx-auto px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          <div ref={imageRef} className="lg:col-span-6">
             <img
               src="/images/hero_1.jpg"
               alt="Legal office"
-              className="w-full h-auto rounded-lg shadow-2xl transform hover:scale-105 transition-transform duration-500"
+              className="w-full h-auto rounded-lg shadow-xl transform hover:scale-[1.01] transition-transform duration-500"
             />
           </div>
-          <div className="md:col-span-1"></div>
-          <div ref={contentRef} className="md:col-span-5 space-y-6">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
-              Welcome To Our Legal Office
+          <div ref={contentRef} className="lg:col-span-6 space-y-6">
+            <div className="inline-block mb-4">
+              <span className="text-sm font-semibold text-primary-600 uppercase tracking-wider">About Us</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
+              Excellence in Legal Practice Since Our Inception
             </h2>
             <p className="text-lg text-gray-600 leading-relaxed">
-              Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the
-              blind texts far from the countries Vokalia and Consonantia, there live the blind texts.
+              We are a premier law firm committed to delivering exceptional legal services. Our team of experienced attorneys combines deep industry knowledge with strategic thinking to provide comprehensive solutions tailored to our clients' unique needs.
             </p>
-            <button
-              className="px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
-              onMouseEnter={(e) => {
-                gsap.to(e.target, { scale: 1.05, x: 5, duration: 0.2 });
-              }}
-              onMouseLeave={(e) => {
-                gsap.to(e.target, { scale: 1, x: 0, duration: 0.2 });
-              }}
-            >
-              Read More
-            </button>
+            <p className="text-lg text-gray-600 leading-relaxed">
+              With a proven track record of success across diverse practice areas, we have built lasting relationships with clients ranging from emerging businesses to established corporations, always prioritizing their success and protecting their interests.
+            </p>
+            <div className="pt-4">
+              <button
+                className="px-8 py-3.5 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-md shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-300 text-sm uppercase tracking-wide"
+                onMouseEnter={(e) => {
+                  gsap.to(e.target, { scale: 1.02, x: 2, duration: 0.2 });
+                }}
+                onMouseLeave={(e) => {
+                  gsap.to(e.target, { scale: 1, x: 0, duration: 0.2 });
+                }}
+              >
+                Learn More About Us
+              </button>
+            </div>
           </div>
         </div>
       </div>

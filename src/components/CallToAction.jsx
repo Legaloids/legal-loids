@@ -35,27 +35,26 @@ const CallToAction = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative py-20 bg-cover bg-center bg-no-repeat bg-fixed"
+      className="relative py-24 bg-cover bg-center bg-no-repeat bg-fixed"
       style={{ backgroundImage: 'url(/images/hero_2.jpg)' }}
     >
-      <div className="absolute inset-0 bg-primary-900/80"></div>
-      <div className="relative z-10 container mx-auto px-4">
+      <div className="absolute inset-0 bg-primary-900/85"></div>
+      <div className="relative z-10 container mx-auto px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center text-white">
-          <div ref={contentRef} className="space-y-6">
-            <h2 className="text-4xl md:text-6xl font-bold">
-              Far far away, behind the word mountains
+          <div ref={contentRef} className="space-y-8">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight">
+              Ready to Discuss Your Legal Needs?
             </h2>
-            <p className="text-xl md:text-2xl text-gray-200">
-              Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the
-              blind texts.
+            <p className="text-lg md:text-xl text-gray-100 max-w-2xl mx-auto leading-relaxed">
+              Our experienced legal team is here to provide strategic counsel and comprehensive solutions tailored to your specific requirements. Schedule a consultation today.
             </p>
-            <div className="pt-4">
+            <div className="pt-6">
               <button
-                className="px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white text-lg font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+                className="px-10 py-4 bg-white text-primary-600 hover:bg-gray-50 text-base font-semibold rounded-md shadow-xl hover:shadow-2xl transform hover:scale-[1.02] transition-all duration-300 uppercase tracking-wide text-sm"
                 onMouseEnter={(e) => {
                   gsap.to(e.target, {
-                    scale: 1.1,
-                    y: -5,
+                    scale: 1.02,
+                    y: -2,
                     boxShadow: '0 20px 40px rgba(0,0,0,0.3)',
                     duration: 0.3,
                   });
@@ -69,7 +68,7 @@ const CallToAction = () => {
                   });
                 }}
               >
-                Consultation
+                Schedule Consultation
               </button>
             </div>
           </div>
