@@ -10,20 +10,20 @@ const Hero = () => {
   const slides = [
     {
       image: '/images/hero_1.jpg',
-      title: 'Excellence in Legal Practice',
-      subtitle: 'Delivering strategic legal solutions with integrity and expertise',
+      title: 'Premier Business Law Consulting Firm',
+      subtitle: 'Delivering integrated legal solutions tailored to complex commercial challenges',
       buttonText: 'Schedule Consultation',
     },
     {
       image: '/images/hero_3.jpg',
-      title: 'Trusted Legal Advisors',
-      subtitle: 'Protecting your interests with decades of combined experience',
+      title: 'Trusted Legal Partners',
+      subtitle: 'Multidisciplinary team combining deep industry knowledge with strategic insights',
       buttonText: 'Our Expertise',
     },
     {
       image: '/images/hero_2.jpg',
       title: 'Your Success, Our Commitment',
-      subtitle: 'Comprehensive legal services tailored to your business needs',
+      subtitle: 'Corporate law, litigation, and advisory services for businesses in India and internationally',
       buttonText: 'Contact Us',
     },
   ];

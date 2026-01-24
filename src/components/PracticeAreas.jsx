@@ -17,38 +17,53 @@ const PracticeAreas = ({ title, description, showViewMore = false }) => {
 
   const practiceAreas = [
     {
-      icon: BuildingOfficeIcon,
-      title: 'Real Estate Law',
-      description: 'Comprehensive legal services for property transactions, development projects, and real estate disputes with expertise in commercial and residential matters.',
+      icon: BriefcaseIcon,
+      title: 'General Corporate Advisory & Legal Drafting',
+      description: 'Expert guidance on company incorporation, filings, compliances, due diligence, and business development. We draft board and shareholder resolutions, negotiate deals, and ensure adherence to corporate laws, SEBI regulations, and RBI requirements.',
+    },
+    {
+      icon: ScaleIcon,
+      title: 'Commercial & Civil Litigation',
+      description: 'Our litigation practice covers civil disputes, domestic and international arbitrations, statutory proceedings, and criminal matters in a corporate context. We formulate strategies for foreign investments, transactions, and resolutions.',
     },
     {
       icon: LockClosedIcon,
-      title: 'Insurance Law',
-      description: 'Strategic representation in insurance claims, coverage disputes, and regulatory compliance to protect your interests and maximize recovery.',
-    },
-    {
-      icon: BriefcaseIcon,
-      title: 'Corporate & Business Law',
-      description: 'End-to-end corporate legal services including M&A, corporate governance, compliance, and strategic business transactions.',
+      title: 'Banking & Finance',
+      description: 'We advise on full-spectrum financing transactions, including corporate facilities, leveraged finance, derivatives, trade finance, project finance, asset finance, and restructurings. Our team secures governmental approvals and coordinates with regulators.',
     },
   ];
 
   const extendedPracticeAreas = [
     ...practiceAreas,
     {
-      icon: ScaleIcon,
-      title: 'Personal Injury',
-      description: 'Dedicated representation for personal injury cases, ensuring fair compensation and justice for victims of accidents and negligence.',
+      icon: LockClosedIcon,
+      title: 'Corporate Criminal Matters',
+      description: 'Specializing in white-collar crime, anti-corruption, and ethical practices, we conduct investigations, pre-investment due diligence, compliance workshops, and litigation.',
     },
     {
       icon: HeartIcon,
-      title: 'Medical Negligence',
-      description: 'Expert legal counsel for medical malpractice cases, protecting patients\' rights and seeking appropriate compensation for medical errors.',
+      title: 'Intellectual Property Rights',
+      description: 'Our IP practice encompasses prosecution, enforcement, transactions, and litigation for patents, trademarks, copyrights, designs, geographical indications, and domain names.',
+    },
+    {
+      icon: BriefcaseIcon,
+      title: 'Mergers and Acquisitions',
+      description: 'We guide clients through M&A transactions, spin-offs, reorganizations, entry strategies, fund formations, and tax-efficient structures. Our advisory includes private equity deals and cross-border taxation.',
+    },
+    {
+      icon: BuildingOfficeIcon,
+      title: 'Information Technology and Cyber Crimes',
+      description: 'We advise on the Information Technology Act, blockchain, RBI guidelines, big data, cryptocurrencies, and cyber crimes. Services include compliance, dispute resolution, and protection against digital threats.',
     },
     {
       icon: ScaleIcon,
-      title: 'Criminal Defense',
-      description: 'Experienced criminal defense representation protecting your rights and providing strategic defense in all criminal matters.',
+      title: 'Taxation Laws',
+      description: 'Excelling in direct and indirect taxation, we provide advisory on corporate tax, M&A tax, international taxation, private client trusts, estate planning, and disputes.',
+    },
+    {
+      icon: HeartIcon,
+      title: 'Real Estate Laws',
+      description: 'Comprehensive support for property transactions, including vetting, drafting, registrations, title searches, due diligence for builders, and disputes resolution.',
     },
   ];
 

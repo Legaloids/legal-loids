@@ -83,8 +83,19 @@ const ContactPage = () => {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-1">Address</h3>
-                    <p className="text-gray-600">198 West 21th Street,<br />Suite 721 New York NY 10016</p>
+                    <h3 className="font-semibold text-gray-900 mb-1">Head Office</h3>
+                    <p className="text-gray-600">A-59, Sector-27,<br />Noida-201301, India</p>
+                    <p className="text-gray-600 mt-3">
+                      <strong>New Delhi Office:</strong><br />
+                      A2/69 – Manu Apartment,<br />
+                      Mayur Vihar, New Delhi,<br />
+                      Delhi 110091, India
+                    </p>
+                    <p className="text-gray-600 mt-3">
+                      <strong>Associate Office:</strong><br />
+                      C-32, Subhash Nagar,<br />
+                      Agra-282010, India
+                    </p>
                   </div>
                 </div>
 
@@ -96,8 +107,11 @@ const ContactPage = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-1">Phone</h3>
-                    <a href="tel:+1235235598" className="text-primary-600 hover:text-primary-700">
-                      + 1235 2355 98
+                    <a href="tel:+911204157858" className="text-primary-600 hover:text-primary-700 block">
+                      +91-120-4157858
+                    </a>
+                    <a href="tel:+918881668058" className="text-primary-600 hover:text-primary-700 block mt-1">
+                      +91-8881668058
                     </a>
                   </div>
                 </div>
@@ -110,8 +124,8 @@ const ContactPage = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-1">Email</h3>
-                    <a href="mailto:info@yoursite.com" className="text-primary-600 hover:text-primary-700">
-                      info@yoursite.com
+                    <a href="mailto:admin@legaloids.com" className="text-primary-600 hover:text-primary-700">
+                      admin@legaloids.com
                     </a>
                   </div>
                 </div>

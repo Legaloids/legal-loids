@@ -10,25 +10,46 @@ const Attorneys = () => {
 
   const attorneys = [
     {
-      image: '/images/user-3.jpg',
-      name: 'Joyce Kroell',
-      role: 'Counsel',
-      description:
-        'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.',
-    },
-    {
       image: '/images/user-1.jpg',
-      name: 'James Garett',
-      role: 'Head of International Practice',
+      name: 'Shobhit Kulshrestha',
+      role: 'Founding Partner',
       description:
-        'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.',
+        'Lawyer and Company Secretary specializing in banking, corporate laws, fintech, securities, and taxation. With thorough expertise in corporate practices, he navigates modern business policies effectively. Ph: +91-8881668058',
     },
     {
       image: '/images/user-2.jpg',
-      name: 'Peter Washington',
-      role: 'Managing Partner, Attorney',
+      name: 'A.J. Ashish',
+      role: 'Senior Partner',
       description:
-        'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.',
+        'Advocate focusing on DRT, NCLT, consumer, recovery suits, corporate insolvency, and due diligence.',
+    },
+    {
+      image: '/images/user-3.jpg',
+      name: 'Pradeep Kumar Kulshrestha',
+      role: 'Senior Partner',
+      description:
+        'Practicing advocate with 34 years in banking and civil matters; heads Agra associate branch, paneled with major banks.',
+    },
+    {
+      image: '/images/user-1.jpg',
+      name: 'Aishwarya Mohan Gahrana',
+      role: 'Senior Partner',
+      description:
+        'Expert in corporate advisory and litigation.',
+    },
+    {
+      image: '/images/user-2.jpg',
+      name: 'Rajiv Kumar Shrivastava',
+      role: 'Senior Partner',
+      description:
+        'Specializes in commercial and financial law.',
+    },
+    {
+      image: '/images/user-3.jpg',
+      name: 'Pallavi Tiwari',
+      role: 'Associate Partner',
+      description:
+        'Focuses on customized legal strategies and client servicing.',
     },
   ];
 
@@ -64,11 +85,10 @@ const Attorneys = () => {
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Our Attorneys</h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the
-            blind texts.
+            Our team is focused on delivering commercial solutions to legal challenges. We understand the industries and sectors our clients operate in, applying years of experience to advise leading companies worldwide.
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {attorneys.map((attorney, index) => (
             <div
               key={index}

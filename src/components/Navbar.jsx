@@ -334,21 +334,21 @@ const Navbar = () => {
             <div className="space-y-5 text-primary-200">
               <div>
                 <p className="text-sm font-semibold text-white mb-3 tracking-wide uppercase">Contact Us</p>
-                <p className="text-sm leading-relaxed">198 West 21th Street</p>
-                <p className="text-sm leading-relaxed">Suite 721 New York NY 10016</p>
+                <p className="text-sm leading-relaxed">A-59, Sector-27, Noida-201301</p>
+                <p className="text-sm leading-relaxed">New Delhi, India</p>
               </div>
               <div>
                 <a
-                  href="tel:+1235235598"
+                  href="tel:+911204157858"
                   className="text-sm hover:text-white transition-colors duration-200 block mb-1"
                 >
-                  + 1235 2355 98
+                  +91-120-4157858
                 </a>
                 <a
-                  href="mailto:info@yoursite.com"
+                  href="mailto:admin@legaloids.com"
                   className="text-sm hover:text-white transition-colors duration-200 block"
                 >
-                  info@yoursite.com
+                  admin@legaloids.com
                 </a>
               </div>
             </div>

@@ -84,15 +84,27 @@ const Footer = () => {
           <div ref={(el) => (sectionsRef.current[2] = el)}>
             <h4 className="text-lg font-semibold text-white mb-6 uppercase tracking-wider text-sm">Contact Information</h4>
             <ul className="space-y-3 text-gray-400 text-sm">
-              <li className="leading-relaxed">198 West 21th Street, <br /> Suite 721 New York NY 10016</li>
+              <li className="leading-relaxed">
+                <strong>Head Office:</strong><br />
+                A-59, Sector-27, Noida-201301, India
+              </li>
+              <li className="leading-relaxed">
+                <strong>New Delhi Office:</strong><br />
+                A2/69 – Manu Apartment, Mayur Vihar,<br />
+                New Delhi, Delhi 110091, India
+              </li>
+              <li className="leading-relaxed mt-2">
+                <strong>Associate Office:</strong><br />
+                C-32, Subhash Nagar, Agra-282010, India
+              </li>
               <li>
-                <a href="tel:+1235235598" className="hover:text-primary-400 transition-colors duration-200 block">
-                  + 1235 2355 98
+                <a href="tel:+911204157858" className="hover:text-primary-400 transition-colors duration-200 block">
+                  +91-120-4157858
                 </a>
               </li>
               <li>
-                <a href="mailto:info@yoursite.com" className="hover:text-primary-400 transition-colors duration-200 block">
-                  info@yoursite.com
+                <a href="mailto:admin@legaloids.com" className="hover:text-primary-400 transition-colors duration-200 block">
+                  admin@legaloids.com
                 </a>
               </li>
             </ul>

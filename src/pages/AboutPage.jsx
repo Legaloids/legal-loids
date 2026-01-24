@@ -34,9 +34,9 @@ const AboutPage = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60"></div>
         <div className="relative z-10 h-full flex items-center justify-center text-white">
           <div className="container mx-auto px-4 text-center">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6">About Legal Office</h1>
+            <h1 className="text-5xl md:text-7xl font-bold mb-6">About Legaloids Law Offices</h1>
             <p className="text-xl md:text-2xl text-gray-200 mb-8">
-              Professional Legal Services You Can Trust
+              Premier Business Law Consulting Firm
             </p>
           </div>
         </div>
@@ -56,15 +56,17 @@ const AboutPage = () => {
             <div className="md:col-span-1"></div>
             <div className="md:col-span-5 space-y-6">
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
-                Welcome To Our Legal Office
+                About Legaloids Law Offices
               </h2>
               <p className="text-lg text-gray-600 leading-relaxed">
-                Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the
-                blind texts far from the countries Vokalia and Consonantia, there live the blind texts.
+                At Legaloids Law Offices, we prioritize client trust and deliver robust, effective legal representation to address diverse business needs. Founded on enduring client relationships, our firm provides personalized, accessible services with meticulous attention to detail, consistently achieving favorable outcomes.
               </p>
-              <button className="px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
-                Read More
-              </button>
+              <p className="text-lg text-gray-600 leading-relaxed">
+                As a full-service corporate and litigation law firm headquartered in New Delhi, with associate offices in Noida, Pune, Mumbai, and Agra, we offer timely, cost-effective solutions in contracts, transactions, and regulatory matters. Our approach emphasizes thorough due diligence, strategic planning, and proactive risk management.
+              </p>
+              <p className="text-lg text-gray-600 leading-relaxed">
+                Legaloids is more than a law firm—we are a consulting powerhouse akin to global leaders like PwC and Deloitte, focusing on long-term partnerships. Our professionals, drawn from top-tier backgrounds, specialize in corporate advisory, banking, fintech, taxation, and more.
+              </p>
             </div>
           </div>
         </div>
