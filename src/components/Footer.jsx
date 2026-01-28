@@ -46,7 +46,7 @@ const Footer = () => {
           </div>
 
           <div ref={(el) => (sectionsRef.current[1] = el)}>
-            <h4 className="text-base sm:text-lg font-semibold text-white mb-4 sm:mb-6 uppercase tracking-wider text-xs sm:text-sm">Navigation</h4>
+            <h4 className="text-base sm:text-lg font-semibold text-white mb-4 sm:mb-6 uppercase tracking-wider">Navigation</h4>
             <ul className="space-y-2 sm:space-y-3">
               <li>
                 <Link to="/" className="text-xs sm:text-sm hover:text-primary-400 transition-colors duration-200 block">
@@ -82,7 +82,7 @@ const Footer = () => {
           </div>
 
           <div ref={(el) => (sectionsRef.current[2] = el)}>
-            <h4 className="text-base sm:text-lg font-semibold text-white mb-4 sm:mb-6 uppercase tracking-wider text-xs sm:text-sm">Contact Information</h4>
+            <h4 className="text-base sm:text-lg font-semibold text-white mb-4 sm:mb-6 uppercase tracking-wider">Contact Information</h4>
             <ul className="space-y-2 sm:space-y-3 text-gray-400 text-xs sm:text-sm">
               <li className="leading-relaxed">
                 <strong>Head Office:</strong><br />
@@ -111,7 +111,7 @@ const Footer = () => {
           </div>
 
           <div ref={(el) => (sectionsRef.current[3] = el)}>
-            <h4 className="text-base sm:text-lg font-semibold text-white mb-4 sm:mb-6 uppercase tracking-wider text-xs sm:text-sm">Office Hours</h4>
+            <h4 className="text-base sm:text-lg font-semibold text-white mb-4 sm:mb-6 uppercase tracking-wider">Office Hours</h4>
             <ul className="space-y-2 sm:space-y-3 text-gray-400 text-xs sm:text-sm">
               <li>Monday - Thursday: 9:00 AM - 9:00 PM</li>
               <li>Friday: 8:00 AM - 9:00 PM</li>

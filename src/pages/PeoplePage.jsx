@@ -44,7 +44,7 @@ const PeoplePage = () => {
       {/* Team Stats */}
       <section className="py-12 sm:py-16 md:py-20 bg-gray-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6 lg:gap-8 text-center">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6 lg:gap-8 text-center">
             {[
               { number: '150+', label: 'Attorneys' },
               { number: '25+', label: 'Partners' },
