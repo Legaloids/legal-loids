@@ -10,6 +10,7 @@ const HomePage = () => {
   const containerRef = useRef(null);
   const slidesRef = useRef([]);
   const [activeSection, setActiveSection] = useState(0);
+  const scrollDirectionRef = useRef('down'); // Track scroll direction
 
   const sections = [
     {
@@ -69,6 +70,19 @@ const HomePage = () => {
     },
   ];
 
+  // Initialize all slides on mount
+  useEffect(() => {
+    slidesRef.current.forEach((slide, index) => {
+      if (slide) {
+        if (index === 0) {
+          gsap.set(slide, { opacity: 1, y: 0 });
+        } else {
+          gsap.set(slide, { opacity: 0, y: 0 });
+        }
+      }
+    });
+  }, []);
+
   // Change slide on each scroll (wheel) step
   useEffect(() => {
     let isThrottled = false;
@@ -84,11 +98,13 @@ const HomePage = () => {
 
       if (event.deltaY > 0) {
         // scroll down -> next slide
+        scrollDirectionRef.current = 'down';
         setActiveSection((prev) =>
           prev < sections.length - 1 ? prev + 1 : prev
         );
       } else if (event.deltaY < 0) {
         // scroll up -> previous slide
+        scrollDirectionRef.current = 'up';
         setActiveSection((prev) => (prev > 0 ? prev - 1 : prev));
       }
     };
@@ -101,39 +117,66 @@ const HomePage = () => {
   }, [sections.length]);
 
   useEffect(() => {
-    const currentSlide = slidesRef.current[activeSection];
-    if (!currentSlide) return;
+    // Use requestAnimationFrame to ensure DOM is ready
+    requestAnimationFrame(() => {
+      const currentSlide = slidesRef.current[activeSection];
+      if (!currentSlide) return;
 
-    const title = currentSlide.querySelector('.section-title');
-    const subtitle = currentSlide.querySelector('.section-subtitle');
-    const description = currentSlide.querySelector('.section-description');
-    const button = currentSlide.querySelector('.section-button');
-    const elements = [title, subtitle, description, button].filter(Boolean);
+      // Reset and hide all other slides
+      slidesRef.current.forEach((slide, index) => {
+        if (slide && index !== activeSection) {
+          const title = slide.querySelector('.section-title');
+          const subtitle = slide.querySelector('.section-subtitle');
+          const description = slide.querySelector('.section-description');
+          const button = slide.querySelector('.section-button');
+          const elements = [title, subtitle, description, button].filter(Boolean);
+          
+          gsap.killTweensOf([slide, ...elements]);
+          gsap.set(elements, { opacity: 0, y: 0 });
+        }
+      });
 
-    // Animate the whole slide "falling" down
-    gsap.fromTo(
-      currentSlide,
-      { opacity: 0, y: -80 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.9,
-        ease: 'power2.out',
-      }
-    );
+      const title = currentSlide.querySelector('.section-title');
+      const subtitle = currentSlide.querySelector('.section-subtitle');
+      const description = currentSlide.querySelector('.section-description');
+      const button = currentSlide.querySelector('.section-button');
+      const elements = [title, subtitle, description, button].filter(Boolean);
 
-    // Then animate the text/content with a slight stagger
-    gsap.fromTo(
-      elements,
-      { opacity: 0, y: -30 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.9,
-        ease: 'power2.out',
-        stagger: 0.1,
-      }
-    );
+      // Determine animation direction based on scroll direction
+      const isScrollingDown = scrollDirectionRef.current === 'down';
+      const slideStartY = isScrollingDown ? -80 : 80;
+      const elementStartY = isScrollingDown ? -30 : 30;
+
+      // Kill any existing animations on this slide
+      gsap.killTweensOf([currentSlide, ...elements]);
+
+      // Animate the whole slide based on scroll direction using fromTo
+      gsap.fromTo(
+        currentSlide,
+        { opacity: 0, y: slideStartY },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.9,
+          ease: 'power2.out',
+          immediateRender: false,
+        }
+      );
+
+      // Then animate the text/content with a slight stagger
+      gsap.fromTo(
+        elements,
+        { opacity: 0, y: elementStartY },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.9,
+          ease: 'power2.out',
+          stagger: 0.1,
+          immediateRender: false,
+        }
+      );
+    });
   }, [activeSection]);
 
   return (
@@ -184,8 +227,8 @@ const HomePage = () => {
           <section
             key={section.id}
             ref={(el) => (slidesRef.current[index] = el)}
-            className={`absolute inset-0 transition-opacity duration-700 ease-out ${
-              activeSection === index ? 'opacity-100' : 'opacity-0 pointer-events-none'
+            className={`absolute inset-0 ${
+              activeSection === index ? 'z-10' : 'z-0 pointer-events-none'
             }`}
           >
             <div
