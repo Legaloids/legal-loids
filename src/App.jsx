@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { gsap } from 'gsap';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -18,7 +18,8 @@ import NewsEventsPage from './pages/NewsEventsPage';
 import LegacyPage from './pages/LegacyPage';
 import ThoughtLeadershipPage from './pages/ThoughtLeadershipPage';
 
-function App() {
+function AppContent() {
+  const location = useLocation();
   const [isLoading, setIsLoading] = useState(true);
   const loaderRef = React.useRef(null);
 
@@ -41,43 +42,52 @@ function App() {
   }, []);
 
   return (
-    <Router>
-      <div className="min-h-screen bg-white">
-        {/* Disclaimer Modal */}
-        <Disclaimer />
-        
-        {/* Loading Screen */}
-        {isLoading && (
-          <div
-            ref={loaderRef}
-            className="fixed inset-0 z-[9999] flex items-center justify-center bg-primary-600"
-          >
-            <div className="text-center">
-              <div className="w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-              <p className="text-white text-xl font-semibold">Loading...</p>
-            </div>
+    <div className="min-h-screen bg-white">
+      {/* Disclaimer Modal */}
+      <Disclaimer />
+
+      {/* Loading Screen */}
+      {isLoading && (
+        <div
+          ref={loaderRef}
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-primary-600"
+        >
+          <div className="text-center">
+            <div className="w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+            <p className="text-white text-xl font-semibold">Loading...</p>
           </div>
-        )}
-        <Navbar />
-        <main className="pt-20">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="/blog" element={<BlogPage />} />
-            <Route path="/blog-single" element={<BlogSinglePage />} />
-            <Route path="/gallery" element={<GalleryPage />} />
-            <Route path="/practice" element={<PracticePage />} />
-            <Route path="/won" element={<WonPage />} />
-            <Route path="/expertise" element={<ExpertisePage />} />
-            <Route path="/people" element={<PeoplePage />} />
-            <Route path="/news-events" element={<NewsEventsPage />} />
-            <Route path="/legacy" element={<LegacyPage />} />
-            <Route path="/thought-leadership" element={<ThoughtLeadershipPage />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
+        </div>
+      )}
+
+      <Navbar />
+      <main className="pt-20">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/blog" element={<BlogPage />} />
+          <Route path="/blog-single" element={<BlogSinglePage />} />
+          <Route path="/gallery" element={<GalleryPage />} />
+          <Route path="/practice" element={<PracticePage />} />
+          <Route path="/won" element={<WonPage />} />
+          <Route path="/expertise" element={<ExpertisePage />} />
+          <Route path="/people" element={<PeoplePage />} />
+          <Route path="/news-events" element={<NewsEventsPage />} />
+          <Route path="/legacy" element={<LegacyPage />} />
+          <Route path="/thought-leadership" element={<ThoughtLeadershipPage />} />
+        </Routes>
+      </main>
+
+      {/* Hide footer on home page only */}
+      {location.pathname !== '/' && <Footer />}
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <AppContent />
     </Router>
   );
 }
