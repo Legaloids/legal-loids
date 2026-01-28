@@ -95,7 +95,7 @@ const HomePage = () => {
       isThrottled = true;
       setTimeout(() => {
         isThrottled = false;
-      }, 800); // close to animation duration
+      }, 2200); // close to animation duration
 
       if (event.deltaY > 0) {
         // scroll down -> next slide
@@ -130,10 +130,10 @@ const HomePage = () => {
 
       // Determine animation direction based on scroll direction
       const isScrollingDown = scrollDirectionRef.current === 'down';
-      const slideStartY = isScrollingDown ? -80 : 80;
-      const slideEndY = isScrollingDown ? 80 : -80; // Opposite direction for exit
-      const elementStartY = isScrollingDown ? -30 : 30;
-      const elementEndY = isScrollingDown ? 30 : -30; // Opposite direction for exit
+      const slideStartY = isScrollingDown ? -200 : 200; // Increased distance for longer travel
+      const slideEndY = isScrollingDown ? 200 : -200; // Opposite direction for exit
+      const elementStartY = isScrollingDown ? -60 : 60; // Increased distance for content
+      const elementEndY = isScrollingDown ? 60 : -60; // Opposite direction for exit
 
       // Animate the exiting slide out (if it exists and is different from current)
       if (previousSlide && prevSection !== activeSection) {
@@ -150,7 +150,7 @@ const HomePage = () => {
         gsap.to(previousSlide, {
           opacity: 0,
           y: slideEndY,
-          duration: 0.9,
+          duration: 2.0,
           ease: 'power2.out',
         });
 
@@ -158,9 +158,9 @@ const HomePage = () => {
         gsap.to(prevElements, {
           opacity: 0,
           y: elementEndY,
-          duration: 0.9,
+          duration: 2.0,
           ease: 'power2.out',
-          stagger: 0.1,
+          stagger: 0.2,
         });
       }
 
@@ -184,10 +184,11 @@ const HomePage = () => {
       const subtitle = currentSlide.querySelector('.section-subtitle');
       const description = currentSlide.querySelector('.section-description');
       const button = currentSlide.querySelector('.section-button');
-      const elements = [title, subtitle, description, button].filter(Boolean);
+      const textElements = [title, subtitle, description].filter(Boolean);
+      const allElements = [title, subtitle, description, button].filter(Boolean);
 
       // Kill any existing animations on current slide
-      gsap.killTweensOf([currentSlide, ...elements]);
+      gsap.killTweensOf([currentSlide, ...allElements]);
 
       // Animate the current slide in based on scroll direction
       gsap.fromTo(
@@ -196,31 +197,47 @@ const HomePage = () => {
         {
           opacity: 1,
           y: 0,
-          duration: 0.9,
+          duration: 2.0,
           ease: 'power2.out',
           immediateRender: false,
         }
       );
 
-      // Animate the current slide's content in with stagger
+      // Animate the text content (title, subtitle, description) with stagger
       gsap.fromTo(
-        elements,
+        textElements,
         { opacity: 0, y: elementStartY },
         {
           opacity: 1,
           y: 0,
-          duration: 0.9,
+          duration: 2.0,
           ease: 'power2.out',
-          stagger: 0.1,
+          stagger: 0.2,
           immediateRender: false,
         }
       );
+
+      // Animate the button at the same time as the subtitle (appears earlier)
+      if (button) {
+        gsap.fromTo(
+          button,
+          { opacity: 0, y: elementStartY },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 2.0,
+            ease: 'power2.out',
+            immediateRender: false,
+            delay: 0.2, // Start with subtitle (second element)
+          }
+        );
+      }
 
       // Update previous section state
       setPreviousSection(activeSection);
     });
   }, [activeSection]);
-
+9
   return (
     <>
       <div ref={containerRef} className="relative min-h-screen overflow-hidden">
