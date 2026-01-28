@@ -266,7 +266,11 @@ const HomePage = () => {
 
   return (
     <>
-      <div ref={containerRef} className={`relative min-h-screen ${isMobile ? 'overflow-y-auto' : 'overflow-hidden'}`}>
+      <div 
+        ref={containerRef} 
+        className={`relative ${isMobile ? 'overflow-y-auto bg-black' : 'overflow-hidden min-h-screen'}`}
+        style={isMobile ? { minHeight: `${sections.length * 100}vh` } : {}}
+      >
         {/* Right-side tracker */}
         <div className="fixed right-8 top-1/2 -translate-y-1/2 z-50 hidden lg:block">
           <div className="relative">
@@ -325,7 +329,7 @@ const HomePage = () => {
           <section
             key={section.id}
             ref={(el) => (slidesRef.current[index] = el)}
-            className={`${isMobile ? 'relative min-h-screen' : 'absolute inset-0'} ${
+            className={`${isMobile ? 'relative min-h-screen w-full' : 'absolute inset-0'} ${
               activeSection === index 
                 ? 'z-10' 
                 : previousSection === index 
@@ -334,13 +338,13 @@ const HomePage = () => {
             }`}
           >
             <div
-              className={`${isMobile ? 'absolute' : 'absolute'} inset-0 bg-cover bg-center bg-no-repeat`}
+              className={`absolute inset-0 bg-cover bg-center bg-no-repeat bg-black`}
               style={{ backgroundImage: `url(${section.image})` }}
             >
               <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70" />
             </div>
 
-            <div className="relative z-10 min-h-screen flex items-center justify-center py-12 md:py-0">
+            <div className={`relative z-10 ${isMobile ? 'min-h-screen' : 'min-h-screen'} flex items-center justify-center py-12 md:py-0`}>
               <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="max-w-5xl mx-auto text-center text-white">
                   <div className="space-y-4 sm:space-y-6 md:space-y-8">
