@@ -10,6 +10,7 @@ const HomePage = () => {
   const containerRef = useRef(null);
   const slidesRef = useRef([]);
   const [activeSection, setActiveSection] = useState(0);
+  const [previousSection, setPreviousSection] = useState(0);
   const scrollDirectionRef = useRef('down'); // Track scroll direction
 
   const sections = [
@@ -117,14 +118,55 @@ const HomePage = () => {
   }, [sections.length]);
 
   useEffect(() => {
+    // Store the previous active section before it changes
+    const prevSection = previousSection;
+    
     // Use requestAnimationFrame to ensure DOM is ready
     requestAnimationFrame(() => {
       const currentSlide = slidesRef.current[activeSection];
+      const previousSlide = slidesRef.current[prevSection];
+      
       if (!currentSlide) return;
 
-      // Reset and hide all other slides
+      // Determine animation direction based on scroll direction
+      const isScrollingDown = scrollDirectionRef.current === 'down';
+      const slideStartY = isScrollingDown ? -80 : 80;
+      const slideEndY = isScrollingDown ? 80 : -80; // Opposite direction for exit
+      const elementStartY = isScrollingDown ? -30 : 30;
+      const elementEndY = isScrollingDown ? 30 : -30; // Opposite direction for exit
+
+      // Animate the exiting slide out (if it exists and is different from current)
+      if (previousSlide && prevSection !== activeSection) {
+        const prevTitle = previousSlide.querySelector('.section-title');
+        const prevSubtitle = previousSlide.querySelector('.section-subtitle');
+        const prevDescription = previousSlide.querySelector('.section-description');
+        const prevButton = previousSlide.querySelector('.section-button');
+        const prevElements = [prevTitle, prevSubtitle, prevDescription, prevButton].filter(Boolean);
+
+        // Kill any existing animations on the previous slide
+        gsap.killTweensOf([previousSlide, ...prevElements]);
+
+        // Animate the previous slide out
+        gsap.to(previousSlide, {
+          opacity: 0,
+          y: slideEndY,
+          duration: 0.9,
+          ease: 'power2.out',
+        });
+
+        // Animate the previous slide's content out
+        gsap.to(prevElements, {
+          opacity: 0,
+          y: elementEndY,
+          duration: 0.9,
+          ease: 'power2.out',
+          stagger: 0.1,
+        });
+      }
+
+      // Reset and prepare inactive slides (excluding previous and current)
       slidesRef.current.forEach((slide, index) => {
-        if (slide && index !== activeSection) {
+        if (slide && index !== activeSection && index !== prevSection) {
           const title = slide.querySelector('.section-title');
           const subtitle = slide.querySelector('.section-subtitle');
           const description = slide.querySelector('.section-description');
@@ -132,25 +174,22 @@ const HomePage = () => {
           const elements = [title, subtitle, description, button].filter(Boolean);
           
           gsap.killTweensOf([slide, ...elements]);
+          gsap.set(slide, { opacity: 0, y: 0 });
           gsap.set(elements, { opacity: 0, y: 0 });
         }
       });
 
+      // Get current slide elements
       const title = currentSlide.querySelector('.section-title');
       const subtitle = currentSlide.querySelector('.section-subtitle');
       const description = currentSlide.querySelector('.section-description');
       const button = currentSlide.querySelector('.section-button');
       const elements = [title, subtitle, description, button].filter(Boolean);
 
-      // Determine animation direction based on scroll direction
-      const isScrollingDown = scrollDirectionRef.current === 'down';
-      const slideStartY = isScrollingDown ? -80 : 80;
-      const elementStartY = isScrollingDown ? -30 : 30;
-
-      // Kill any existing animations on this slide
+      // Kill any existing animations on current slide
       gsap.killTweensOf([currentSlide, ...elements]);
 
-      // Animate the whole slide based on scroll direction using fromTo
+      // Animate the current slide in based on scroll direction
       gsap.fromTo(
         currentSlide,
         { opacity: 0, y: slideStartY },
@@ -163,7 +202,7 @@ const HomePage = () => {
         }
       );
 
-      // Then animate the text/content with a slight stagger
+      // Animate the current slide's content in with stagger
       gsap.fromTo(
         elements,
         { opacity: 0, y: elementStartY },
@@ -176,6 +215,9 @@ const HomePage = () => {
           immediateRender: false,
         }
       );
+
+      // Update previous section state
+      setPreviousSection(activeSection);
     });
   }, [activeSection]);
 
@@ -228,7 +270,11 @@ const HomePage = () => {
             key={section.id}
             ref={(el) => (slidesRef.current[index] = el)}
             className={`absolute inset-0 ${
-              activeSection === index ? 'z-10' : 'z-0 pointer-events-none'
+              activeSection === index 
+                ? 'z-10' 
+                : previousSection === index 
+                  ? 'z-5' 
+                  : 'z-0 pointer-events-none'
             }`}
           >
             <div
