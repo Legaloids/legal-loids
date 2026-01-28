@@ -60,16 +60,16 @@ const Blog = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-20 bg-white">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Recent Post</h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+    <section ref={sectionRef} className="py-12 sm:py-16 md:py-20 bg-white">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-10 sm:mb-12 md:mb-16">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 sm:mb-4 px-4">Recent Post</h2>
+          <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-3xl mx-auto px-4">
             Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life
             One day however
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 lg:gap-8">
           {blogPosts.map((post, index) => (
             <article
               key={index}
@@ -97,19 +97,19 @@ const Blog = () => {
                   <img
                     src={post.image}
                     alt={post.title}
-                    className="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500"
+                    className="w-full h-40 sm:h-48 md:h-56 lg:h-64 object-cover transform group-hover:scale-110 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-primary-600/0 group-hover:bg-primary-600/20 transition-colors duration-300"></div>
                 </div>
               </Link>
-              <div className="p-6">
-                <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors duration-300">
+              <div className="p-3 sm:p-4 md:p-5 lg:p-6">
+                <h3 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-2xl font-bold text-gray-900 mb-2 sm:mb-3 group-hover:text-primary-600 transition-colors duration-300 line-clamp-2 sm:line-clamp-none">
                   <Link to="/blog-single">{post.title}</Link>
                 </h3>
-                <p className="text-sm text-gray-500 mb-4">
+                <p className="text-[10px] sm:text-xs md:text-sm text-gray-500 mb-2 sm:mb-3 md:mb-4">
                   <span>{post.date}</span> | <span>{post.comments} Comments</span>
                 </p>
-                <p className="text-gray-600 leading-relaxed">{post.excerpt}</p>
+                <p className="text-[10px] sm:text-xs md:text-sm text-gray-600 leading-relaxed line-clamp-2 sm:line-clamp-3 md:line-clamp-none">{post.excerpt}</p>
               </div>
             </article>
           ))}

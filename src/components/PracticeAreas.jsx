@@ -96,27 +96,27 @@ const PracticeAreas = ({ title, description, showViewMore = false }) => {
   }, [areasToShow]);
 
   return (
-    <section ref={sectionRef} className="py-24 bg-white">
-      <div className="container mx-auto px-6 lg:px-8">
+    <section ref={sectionRef} className="py-12 sm:py-16 md:py-20 lg:py-24 bg-white">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {title && (
-          <div className="text-center mb-20">
-            <div className="inline-block mb-4">
-              <span className="text-sm font-semibold text-primary-600 uppercase tracking-wider">Our Services</span>
+          <div className="text-center mb-12 sm:mb-16 md:mb-20">
+            <div className="inline-block mb-3 sm:mb-4">
+              <span className="text-xs sm:text-sm font-semibold text-primary-600 uppercase tracking-wider">Our Services</span>
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">{title}</h2>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight px-4">{title}</h2>
             {description && (
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">{description}</p>
+              <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed px-4">{description}</p>
             )}
           </div>
         )}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 lg:gap-8 xl:gap-10">
           {areasToShow.map((area, index) => {
             const IconComponent = area.icon;
             return (
               <div
                 key={index}
                 ref={(el) => (cardsRef.current[index] = el)}
-                className="group bg-white p-8 lg:p-10 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-primary-200 transform hover:-translate-y-1"
+                className="group bg-white p-3 sm:p-4 md:p-6 lg:p-8 xl:p-10 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-primary-200 transform hover:-translate-y-1"
                 onMouseEnter={(e) => {
                   gsap.to(e.currentTarget, {
                     y: -4,
@@ -132,21 +132,21 @@ const PracticeAreas = ({ title, description, showViewMore = false }) => {
                   });
                 }}
               >
-                <div className="mb-6 transform group-hover:scale-105 transition-transform duration-300">
-                  <IconComponent className="w-14 h-14 text-primary-600" strokeWidth={1.5} />
+                <div className="mb-3 sm:mb-4 md:mb-5 lg:mb-6 transform group-hover:scale-105 transition-transform duration-300">
+                  <IconComponent className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 text-primary-600" strokeWidth={1.5} />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-primary-600 transition-colors duration-300">
+                <h3 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold text-gray-900 mb-2 sm:mb-3 md:mb-4 group-hover:text-primary-600 transition-colors duration-300 line-clamp-2 sm:line-clamp-none">
                   {area.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed text-sm">{area.description}</p>
+                <p className="text-gray-600 leading-relaxed text-[10px] sm:text-xs md:text-sm line-clamp-2 sm:line-clamp-3 md:line-clamp-none">{area.description}</p>
               </div>
             );
           })}
         </div>
         {showViewMore && (
-          <div className="text-center mt-16">
+          <div className="text-center mt-8 sm:mt-12 md:mt-16">
             <button
-              className="px-10 py-3.5 bg-primary-600 hover:bg-primary-700 text-white text-sm font-semibold rounded-md shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-300 inline-flex items-center gap-2 uppercase tracking-wide"
+              className="px-6 sm:px-8 md:px-10 py-2.5 sm:py-3 md:py-3.5 bg-primary-600 hover:bg-primary-700 text-white text-xs sm:text-sm font-semibold rounded-md shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-300 inline-flex items-center gap-2 uppercase tracking-wide"
               onMouseEnter={(e) => {
                 gsap.to(e.target, { scale: 1.02, x: 2, duration: 0.2 });
               }}

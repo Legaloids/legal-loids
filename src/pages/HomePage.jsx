@@ -314,23 +314,23 @@ const HomePage = () => {
               <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70" />
             </div>
 
-            <div className="relative z-10 min-h-screen flex items-center justify-center">
-              <div className="container mx-auto px-6 lg:px-8">
+            <div className="relative z-10 min-h-screen flex items-center justify-center py-12 md:py-0">
+              <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="max-w-5xl mx-auto text-center text-white">
-                  <div className="space-y-6 md:space-y-8">
-                    <h1 className="section-title text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight tracking-tight">
+                  <div className="space-y-4 sm:space-y-6 md:space-y-8">
+                    <h1 className="section-title text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold leading-tight tracking-tight px-4">
                       {section.title}
                     </h1>
-                    <h2 className="section-subtitle text-lg md:text-xl lg:text-2xl text-gray-100 font-light max-w-3xl mx-auto leading-relaxed">
+                    <h2 className="section-subtitle text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-gray-100 font-light max-w-3xl mx-auto leading-relaxed px-4">
                       {section.subtitle}
                     </h2>
-                    <p className="section-description text-base md:text-lg text-gray-200 max-w-2xl mx-auto leading-relaxed">
+                    <p className="section-description text-xs sm:text-sm md:text-base lg:text-lg text-gray-200 max-w-2xl mx-auto leading-relaxed px-4">
                       {section.description}
                     </p>
-                    <div className="pt-4">
+                    <div className="pt-2 sm:pt-4 px-4">
                       <Link
                         to={section.buttonLink}
-                        className="section-button inline-block px-10 py-4 bg-primary-600 hover:bg-primary-700 text-white text-sm font-semibold rounded-md shadow-xl hover:shadow-2xl transform hover:scale-[1.02] transition-all duration-300 tracking-wide uppercase"
+                        className="section-button inline-block px-6 sm:px-8 md:px-10 py-2.5 sm:py-3 md:py-4 bg-primary-600 hover:bg-primary-700 text-white text-xs sm:text-sm font-semibold rounded-md shadow-xl hover:shadow-2xl transform hover:scale-[1.02] transition-all duration-300 tracking-wide uppercase"
                       >
                         {section.buttonText}
                       </Link>

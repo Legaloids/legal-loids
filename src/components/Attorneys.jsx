@@ -80,15 +80,15 @@ const Attorneys = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Our Attorneys</h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+    <section ref={sectionRef} className="py-12 sm:py-16 md:py-20 bg-gray-50">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-10 sm:mb-12 md:mb-16">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 sm:mb-4 px-4">Our Attorneys</h2>
+          <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-3xl mx-auto px-4">
             Our team is focused on delivering commercial solutions to legal challenges. We understand the industries and sectors our clients operate in, applying years of experience to advise leading companies worldwide.
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 lg:gap-8">
           {attorneys.map((attorney, index) => (
             <div
               key={index}
@@ -123,24 +123,24 @@ const Attorneys = () => {
                 <img
                   src={attorney.image}
                   alt={attorney.name}
-                  className="w-full h-80 object-cover transform transition-transform duration-300"
+                  className="w-full h-48 sm:h-56 md:h-64 lg:h-80 object-cover transform transition-transform duration-300"
                 />
                 <div className="absolute inset-0 bg-primary-600/0 group-hover:bg-primary-600/30 transition-colors duration-300"></div>
               </div>
-              <div className="p-6">
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">{attorney.name}</h3>
-                <p className="text-primary-600 font-semibold mb-4">{attorney.role}</p>
-                <p className="text-gray-600 mb-6">{attorney.description}</p>
-                <div className="flex justify-center space-x-4">
+              <div className="p-3 sm:p-4 md:p-6">
+                <h3 className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-bold text-gray-900 mb-1 sm:mb-2">{attorney.name}</h3>
+                <p className="text-xs sm:text-sm md:text-base text-primary-600 font-semibold mb-2 sm:mb-3 md:mb-4">{attorney.role}</p>
+                <p className="text-[10px] sm:text-xs md:text-sm text-gray-600 mb-3 sm:mb-4 md:mb-6 line-clamp-2 sm:line-clamp-3 md:line-clamp-none">{attorney.description}</p>
+                <div className="flex justify-center space-x-2 sm:space-x-3 md:space-x-4">
                   {['Facebook', 'Twitter', 'Dribbble', 'LinkedIn'].map((social, i) => (
                     <a
                       key={i}
                       href="#!"
                       onClick={(e) => e.preventDefault()}
-                      className="w-10 h-10 bg-gray-100 hover:bg-primary-600 rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110 hover:rotate-360"
+                      className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 bg-gray-100 hover:bg-primary-600 rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110 hover:rotate-360"
                       aria-label={social}
                     >
-                      <span className="text-gray-600 hover:text-white transition-colors">
+                      <span className="text-[8px] sm:text-[10px] md:text-xs text-gray-600 hover:text-white transition-colors">
                         {social[0]}
                       </span>
                     </a>

@@ -22,7 +22,6 @@ const Navbar = () => {
     { label: 'Thought Leadership', path: '/thought-leadership' },
     { label: 'Practice Areas', path: '/practice' },
     { label: 'Won Cases', path: '/won' },
-    { label: 'Gallery', path: '/gallery' },
     {
       label: 'Blog',
       path: '/blog',

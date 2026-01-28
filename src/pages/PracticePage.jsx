@@ -25,14 +25,14 @@ const PracticePage = () => {
       {/* Hero Section */}
       <section
         ref={heroRef}
-        className="relative h-[60vh] bg-cover bg-center bg-no-repeat"
+        className="relative h-[50vh] sm:h-[55vh] md:h-[60vh] bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: 'url(/images/hero_1.jpg)' }}
       >
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60"></div>
         <div className="relative z-10 h-full flex items-center justify-center text-white">
-          <div className="container mx-auto px-4 text-center">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6">Our Practice</h1>
-            <p className="text-xl md:text-2xl text-gray-200">
+          <div className="container mx-auto px-4 sm:px-6 text-center">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 px-4">Our Practice</h1>
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 px-4">
               Comprehensive Legal Services Across All Practice Areas
             </p>
           </div>

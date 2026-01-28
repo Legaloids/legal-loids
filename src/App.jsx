@@ -9,7 +9,6 @@ import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import BlogPage from './pages/BlogPage';
 import BlogSinglePage from './pages/BlogSinglePage';
-import GalleryPage from './pages/GalleryPage';
 import PracticePage from './pages/PracticePage';
 import WonPage from './pages/WonPage';
 import ExpertisePage from './pages/ExpertisePage';
@@ -67,7 +66,6 @@ function AppContent() {
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/blog-single" element={<BlogSinglePage />} />
-          <Route path="/gallery" element={<GalleryPage />} />
           <Route path="/practice" element={<PracticePage />} />
           <Route path="/won" element={<WonPage />} />
           <Route path="/expertise" element={<ExpertisePage />} />
