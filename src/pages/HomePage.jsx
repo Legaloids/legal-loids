@@ -7,7 +7,8 @@ import GoToTop from '../components/GoToTop';
 gsap.registerPlugin(ScrollTrigger);
 
 const HomePage = () => {
-  const sectionsRef = useRef([]);
+  const containerRef = useRef(null);
+  const slidesRef = useRef([]);
   const [activeSection, setActiveSection] = useState(0);
 
   const sections = [
@@ -68,68 +69,76 @@ const HomePage = () => {
     },
   ];
 
+  // Change slide on each scroll (wheel) step
   useEffect(() => {
-    // Scroll animations for each section
-    sections.forEach((_, index) => {
-      const sectionElement = sectionsRef.current[index];
-      if (!sectionElement) return;
+    let isThrottled = false;
 
-      const title = sectionElement.querySelector('.section-title');
-      const subtitle = sectionElement.querySelector('.section-subtitle');
-      const description = sectionElement.querySelector('.section-description');
-      const button = sectionElement.querySelector('.section-button');
-      const elements = [title, subtitle, description, button].filter(Boolean);
+    const handleWheel = (event) => {
+      event.preventDefault();
 
-      // Initial state
-      gsap.set(elements, { opacity: 0, y: 40 });
+      if (isThrottled) return;
+      isThrottled = true;
+      setTimeout(() => {
+        isThrottled = false;
+      }, 800); // close to animation duration
 
-      gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: sectionElement,
-            start: 'top 75%',
-            once: true,
-            onEnter: () => setActiveSection(index),
-          },
-        })
-        .to(elements, {
-          opacity: 1,
-          y: 0,
-          duration: 0.9,
-          ease: 'power2.out',
-          stagger: 0.1,
-        });
-    });
+      if (event.deltaY > 0) {
+        // scroll down -> next slide
+        setActiveSection((prev) =>
+          prev < sections.length - 1 ? prev + 1 : prev
+        );
+      } else if (event.deltaY < 0) {
+        // scroll up -> previous slide
+        setActiveSection((prev) => (prev > 0 ? prev - 1 : prev));
+      }
+    };
 
-    // Tracker active section based on scroll
-    sections.forEach((_, index) => {
-      const sectionElement = sectionsRef.current[index];
-      if (!sectionElement) return;
-
-      ScrollTrigger.create({
-        trigger: sectionElement,
-        start: 'top center',
-        end: 'bottom center',
-        onEnter: () => setActiveSection(index),
-        onEnterBack: () => setActiveSection(index),
-      });
-    });
+    window.addEventListener('wheel', handleWheel, { passive: false });
 
     return () => {
-      ScrollTrigger.getAll().forEach((t) => t.kill());
+      window.removeEventListener('wheel', handleWheel);
     };
-  }, []);
+  }, [sections.length]);
 
-  const scrollToSection = (index) => {
-    const sectionElement = sectionsRef.current[index];
-    if (sectionElement) {
-      sectionElement.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  useEffect(() => {
+    const currentSlide = slidesRef.current[activeSection];
+    if (!currentSlide) return;
+
+    const title = currentSlide.querySelector('.section-title');
+    const subtitle = currentSlide.querySelector('.section-subtitle');
+    const description = currentSlide.querySelector('.section-description');
+    const button = currentSlide.querySelector('.section-button');
+    const elements = [title, subtitle, description, button].filter(Boolean);
+
+    // Animate the whole slide "falling" down
+    gsap.fromTo(
+      currentSlide,
+      { opacity: 0, y: -80 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.9,
+        ease: 'power2.out',
+      }
+    );
+
+    // Then animate the text/content with a slight stagger
+    gsap.fromTo(
+      elements,
+      { opacity: 0, y: -30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.9,
+        ease: 'power2.out',
+        stagger: 0.1,
+      }
+    );
+  }, [activeSection]);
 
   return (
     <>
-      <div className="relative">
+      <div ref={containerRef} className="relative min-h-screen overflow-hidden">
         {/* Right-side tracker */}
         <div className="fixed right-6 top-1/2 -translate-y-1/2 z-50 hidden lg:block">
           <div className="relative">
@@ -144,10 +153,9 @@ const HomePage = () => {
             {/* Items */}
             <div className="relative flex flex-col items-start space-y-8">
               {sections.map((section, index) => (
-                <button
+                <div
                   key={section.id}
-                  onClick={() => scrollToSection(index)}
-                  className="relative flex items-center gap-4 group cursor-pointer"
+                  className="relative flex items-center gap-4 group"
                 >
                   <span
                     className={`text-sm font-medium transition-all duration-300 whitespace-nowrap ${
@@ -165,18 +173,20 @@ const HomePage = () => {
                         : 'bg-transparent border-white/50 group-hover:border-white/70'
                     }`}
                   />
-                </button>
+                </div>
               ))}
             </div>
           </div>
         </div>
 
-        {/* Stacked full-screen sections */}
+        {/* Slides on same screen */}
         {sections.map((section, index) => (
           <section
             key={section.id}
-            ref={(el) => (sectionsRef.current[index] = el)}
-            className="relative min-h-screen w-full overflow-hidden"
+            ref={(el) => (slidesRef.current[index] = el)}
+            className={`absolute inset-0 transition-opacity duration-700 ease-out ${
+              activeSection === index ? 'opacity-100' : 'opacity-0 pointer-events-none'
+            }`}
           >
             <div
               className="absolute inset-0 bg-cover bg-center bg-no-repeat"
