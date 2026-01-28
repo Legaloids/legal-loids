@@ -242,42 +242,55 @@ const HomePage = () => {
     <>
       <div ref={containerRef} className="relative min-h-screen overflow-hidden">
         {/* Right-side tracker */}
-        <div className="fixed right-6 top-1/2 -translate-y-1/2 z-50 hidden lg:block">
+        <div className="fixed right-8 top-1/2 -translate-y-1/2 z-50 hidden lg:block">
           <div className="relative">
-            {/* Vertical line */}
-            <div className="absolute top-0 bottom-0 left-6 w-0.5 bg-white/30">
-              <div
-                className="absolute top-0 left-0 w-full bg-white transition-all duration-300 ease-out"
-                style={{ height: `${((activeSection + 1) / sections.length) * 100}%` }}
-              />
-            </div>
-
-            {/* Items */}
-            <div className="relative flex flex-col items-start space-y-8">
+            {/* Labels and indicators container */}
+            <div className="relative flex flex-col space-y-10 pr-6">
               {sections.map((section, index) => (
                 <div
                   key={section.id}
-                  className="relative flex items-center gap-4 group"
+                  className="relative flex items-center justify-between gap-4 group w-full"
+                  style={{ minWidth: '120px' }}
                 >
+                  {/* Label on the left */}
                   <span
-                    className={`text-sm font-medium transition-all duration-300 whitespace-nowrap ${
+                    className={`transition-all duration-300 whitespace-nowrap ${
                       activeSection === index
-                        ? 'text-white font-bold'
-                        : 'text-white/60 group-hover:text-white/80'
+                        ? 'text-white font-bold text-lg'
+                        : 'text-white/50 text-sm font-normal group-hover:text-white/70'
                     }`}
                   >
                     {section.label}
                   </span>
-                  <div
-                    className={`relative w-3 h-3 rounded-full border-2 transition-all duration-300 ${
-                      activeSection === index
-                        ? 'bg-white border-white'
-                        : 'bg-transparent border-white/50 group-hover:border-white/70'
-                    }`}
-                  />
+                  
+                  {/* Indicator container - positioned to align with line */}
+                  <div className="relative flex items-center justify-center flex-shrink-0" style={{ width: '1.5rem', height: '1.5rem' }}>
+                    {/* Active indicator - bullseye effect */}
+                    {activeSection === index ? (
+                      <>
+                        {/* Outer ring (larger) */}
+                        <div className="absolute w-4 h-4 rounded-full border border-white" style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }} />
+                        {/* Inner solid circle (smaller) */}
+                        <div className="absolute w-2 h-2 rounded-full bg-white" style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }} />
+                      </>
+                    ) : (
+                      /* Inactive indicator - simple outlined circle */
+                      <div className="w-3 h-3 rounded-full border border-white/50 group-hover:border-white/70 transition-all duration-300" style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }} />
+                    )}
+                  </div>
                 </div>
               ))}
             </div>
+            
+            {/* Continuous vertical line through center of all indicators */}
+            <div 
+              className="absolute w-px bg-white"
+              style={{ 
+                right: '0.75rem',
+                top: '0.75rem',
+                bottom: '0.75rem',
+              }} 
+            />
           </div>
         </div>
 
