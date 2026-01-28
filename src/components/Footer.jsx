@@ -15,104 +15,127 @@ const Footer = () => {
     const sections = sectionsRef.current;
 
     if (footer && sections) {
-      gsap.fromTo(
-        sections,
-        { y: 50, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          stagger: 0.1,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: footer,
-            start: 'top 90%',
-            toggleActions: 'play none none reverse',
-          },
+      // Set initial visibility to ensure content is always visible
+      sections.forEach((section) => {
+        if (section) {
+          gsap.set(section, { opacity: 1, y: 0 });
         }
+      });
+
+      // Only animate if footer is not already in view
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              gsap.fromTo(
+                sections,
+                { y: 30, opacity: 0.8 },
+                {
+                  y: 0,
+                  opacity: 1,
+                  duration: 0.8,
+                  stagger: 0.1,
+                  ease: 'power3.out',
+                }
+              );
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1 }
       );
+
+      if (footer) {
+        observer.observe(footer);
+      }
+
+      return () => {
+        if (footer) {
+          observer.unobserve(footer);
+        }
+      };
     }
   }, []);
 
   return (
-    <footer ref={footerRef} className="bg-gray-900 text-gray-300 py-12 sm:py-16 md:py-20">
+    <footer ref={footerRef} className="relative bg-gray-900 text-gray-300 py-12 sm:py-16 md:py-20 z-10">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 md:gap-12 lg:gap-16 mb-10 sm:mb-12 md:mb-16">
-          <div ref={(el) => (sectionsRef.current[0] = el)}>
+          <div ref={(el) => (sectionsRef.current[0] = el)} className="opacity-100">
             <h4 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6 tracking-tight">Legaloids Law Firm</h4>
             <p className="text-gray-400 leading-relaxed text-xs sm:text-sm">
               A premier law firm committed to delivering exceptional legal services with integrity, expertise, and strategic thinking. We protect your interests and guide you toward success.
             </p>
           </div>
 
-          <div ref={(el) => (sectionsRef.current[1] = el)}>
+          <div ref={(el) => (sectionsRef.current[1] = el)} className="opacity-100">
             <h4 className="text-base sm:text-lg font-semibold text-white mb-4 sm:mb-6 uppercase tracking-wider">Navigation</h4>
             <ul className="space-y-2 sm:space-y-3">
               <li>
-                <Link to="/" className="text-xs sm:text-sm hover:text-primary-400 transition-colors duration-200 block">
+                <Link to="/" className="text-gray-300 text-xs sm:text-sm hover:text-primary-400 transition-colors duration-200 block">
                   Home
                 </Link>
               </li>
               <li>
-                <Link to="/practice" className="text-xs sm:text-sm hover:text-primary-400 transition-colors duration-200 block">
+                <Link to="/practice" className="text-gray-300 text-xs sm:text-sm hover:text-primary-400 transition-colors duration-200 block">
                   Practice Areas
                 </Link>
               </li>
               <li>
-                <Link to="/expertise" className="text-xs sm:text-sm hover:text-primary-400 transition-colors duration-200 block">
+                <Link to="/expertise" className="text-gray-300 text-xs sm:text-sm hover:text-primary-400 transition-colors duration-200 block">
                   Expertise
                 </Link>
               </li>
               <li>
-                <Link to="/people" className="text-xs sm:text-sm hover:text-primary-400 transition-colors duration-200 block">
+                <Link to="/people" className="text-gray-300 text-xs sm:text-sm hover:text-primary-400 transition-colors duration-200 block">
                   People
                 </Link>
               </li>
               <li>
-                <Link to="/blog" className="text-xs sm:text-sm hover:text-primary-400 transition-colors duration-200 block">
+                <Link to="/blog" className="text-gray-300 text-xs sm:text-sm hover:text-primary-400 transition-colors duration-200 block">
                   Blog
                 </Link>
               </li>
               <li>
-                <Link to="/about" className="text-xs sm:text-sm hover:text-primary-400 transition-colors duration-200 block">
+                <Link to="/about" className="text-gray-300 text-xs sm:text-sm hover:text-primary-400 transition-colors duration-200 block">
                   About Us
                 </Link>
               </li>
             </ul>
           </div>
 
-          <div ref={(el) => (sectionsRef.current[2] = el)}>
+          <div ref={(el) => (sectionsRef.current[2] = el)} className="opacity-100">
             <h4 className="text-base sm:text-lg font-semibold text-white mb-4 sm:mb-6 uppercase tracking-wider">Contact Information</h4>
             <ul className="space-y-2 sm:space-y-3 text-gray-400 text-xs sm:text-sm">
               <li className="leading-relaxed">
-                <strong>Head Office:</strong><br />
+                <strong className="text-white">Head Office:</strong><br />
                 A-59, Sector-27, Noida-201301, India
               </li>
               <li className="leading-relaxed">
-                <strong>New Delhi Office:</strong><br />
+                <strong className="text-white">New Delhi Office:</strong><br />
                 A2/69 – Manu Apartment, Mayur Vihar,<br />
                 New Delhi, Delhi 110091, India
               </li>
               <li className="leading-relaxed mt-1 sm:mt-2">
-                <strong>Associate Office:</strong><br />
+                <strong className="text-white">Associate Office:</strong><br />
                 C-32, Subhash Nagar, Agra-282010, India
               </li>
               <li>
-                <a href="tel:+911204157858" className="hover:text-primary-400 transition-colors duration-200 block">
+                <a href="tel:+911204157858" className="text-primary-400 hover:text-primary-300 transition-colors duration-200 block">
                   +91-120-4157858
                 </a>
               </li>
               <li>
-                <a href="mailto:admin@legaloids.com" className="hover:text-primary-400 transition-colors duration-200 block">
+                <a href="mailto:admin@legaloids.com" className="text-primary-400 hover:text-primary-300 transition-colors duration-200 block break-all">
                   admin@legaloids.com
                 </a>
               </li>
             </ul>
           </div>
 
-          <div ref={(el) => (sectionsRef.current[3] = el)}>
+          <div ref={(el) => (sectionsRef.current[3] = el)} className="opacity-100">
             <h4 className="text-base sm:text-lg font-semibold text-white mb-4 sm:mb-6 uppercase tracking-wider">Office Hours</h4>
-            <ul className="space-y-2 sm:space-y-3 text-gray-400 text-xs sm:text-sm">
+            <ul className="space-y-2 sm:space-y-3 text-gray-300 text-xs sm:text-sm">
               <li>Monday - Thursday: 9:00 AM - 9:00 PM</li>
               <li>Friday: 8:00 AM - 9:00 PM</li>
               <li>Saturday: 9:30 AM - 3:00 PM</li>

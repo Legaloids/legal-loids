@@ -84,8 +84,18 @@ const HomePage = () => {
     });
   }, []);
 
-  // Change slide on each scroll (wheel) step
+  // Change slide on each scroll (wheel) step - desktop only
   useEffect(() => {
+    // Check if device is mobile/touch device
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+                     ('ontouchstart' in window) || 
+                     (navigator.maxTouchPoints > 0);
+
+    // On mobile, allow normal scrolling - don't add wheel handler
+    if (isMobile) {
+      return;
+    }
+
     let isThrottled = false;
 
     const handleWheel = (event) => {
@@ -238,9 +248,25 @@ const HomePage = () => {
     });
   }, [activeSection]);
 9
+  // Check if device is mobile for conditional rendering
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      const mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+                     ('ontouchstart' in window) || 
+                     (navigator.maxTouchPoints > 0);
+      setIsMobile(mobile);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   return (
     <>
-      <div ref={containerRef} className="relative min-h-screen overflow-hidden">
+      <div ref={containerRef} className={`relative min-h-screen ${isMobile ? 'overflow-y-auto' : 'overflow-hidden'}`}>
         {/* Right-side tracker */}
         <div className="fixed right-8 top-1/2 -translate-y-1/2 z-50 hidden lg:block">
           <div className="relative">
@@ -299,16 +325,16 @@ const HomePage = () => {
           <section
             key={section.id}
             ref={(el) => (slidesRef.current[index] = el)}
-            className={`absolute inset-0 ${
+            className={`${isMobile ? 'relative min-h-screen' : 'absolute inset-0'} ${
               activeSection === index 
                 ? 'z-10' 
                 : previousSection === index 
                   ? 'z-5' 
-                  : 'z-0 pointer-events-none'
+                  : isMobile ? 'z-0' : 'z-0 pointer-events-none'
             }`}
           >
             <div
-              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+              className={`${isMobile ? 'absolute' : 'absolute'} inset-0 bg-cover bg-center bg-no-repeat`}
               style={{ backgroundImage: `url(${section.image})` }}
             >
               <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70" />
