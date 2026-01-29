@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -28,6 +28,16 @@ const ExpertisePage = () => {
   const industriesRef = useRef(null);
   const cardsRef = useRef([]);
   const industryCardsRef = useRef([]);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     if (heroRef.current) {
@@ -302,8 +312,8 @@ const ExpertisePage = () => {
               Explore our comprehensive range of legal services, optimized for international standards and client-centric outcomes
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3 md:gap-6 lg:gap-8">
-            {services.map((service, index) => {
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3 md:gap-6 lg:gap-8">
+            {services.slice(0, isMobile ? 6 : services.length).map((service, index) => {
               const IconComponent = service.icon;
               return (
                 <div
@@ -355,8 +365,8 @@ const ExpertisePage = () => {
               Legaloids Law Offices partners with diverse industries, providing sector-specific legal consulting to navigate regulatory complexities and drive growth
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3 md:gap-5 lg:gap-6">
-            {industries.map((industry, index) => (
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3 md:gap-5 lg:gap-6">
+            {industries.slice(0, isMobile ? 6 : industries.length).map((industry, index) => (
               <div
                 key={index}
                 ref={(el) => (industryCardsRef.current[index] = el)}

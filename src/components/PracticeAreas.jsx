@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
@@ -14,6 +14,7 @@ gsap.registerPlugin(ScrollTrigger);
 const PracticeAreas = ({ title, description, showViewMore = false }) => {
   const sectionRef = useRef(null);
   const cardsRef = useRef([]);
+  const [isMobile, setIsMobile] = useState(false);
 
   const practiceAreas = [
     {
@@ -70,6 +71,15 @@ const PracticeAreas = ({ title, description, showViewMore = false }) => {
   const areasToShow = showViewMore ? extendedPracticeAreas : practiceAreas;
 
   useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  useEffect(() => {
     const cards = cardsRef.current;
     
     cards.forEach((card, index) => {
@@ -109,8 +119,8 @@ const PracticeAreas = ({ title, description, showViewMore = false }) => {
             )}
           </div>
         )}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 lg:gap-8 xl:gap-10">
-          {areasToShow.map((area, index) => {
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 lg:gap-8 xl:gap-10">
+          {areasToShow.slice(0, isMobile ? 6 : areasToShow.length).map((area, index) => {
             const IconComponent = area.icon;
             return (
               <div

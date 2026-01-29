@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -10,6 +10,16 @@ gsap.registerPlugin(ScrollTrigger);
 const NewsEventsPage = () => {
   const heroRef = useRef(null);
   const eventsRef = useRef([]);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     if (heroRef.current) {
@@ -80,8 +90,8 @@ const NewsEventsPage = () => {
       <section className="py-12 sm:py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-8 sm:mb-10 md:mb-12 px-4">Latest News</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6 lg:gap-8">
-            {news.map((item, index) => (
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6 lg:gap-8">
+            {news.slice(0, isMobile ? 6 : news.length).map((item, index) => (
               <div
                 key={index}
                 ref={(el) => (eventsRef.current[index] = el)}

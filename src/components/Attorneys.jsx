@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -7,6 +7,7 @@ gsap.registerPlugin(ScrollTrigger);
 const Attorneys = () => {
   const sectionRef = useRef(null);
   const cardsRef = useRef([]);
+  const [isMobile, setIsMobile] = useState(false);
 
   const attorneys = [
     {
@@ -54,6 +55,15 @@ const Attorneys = () => {
   ];
 
   useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  useEffect(() => {
     const cards = cardsRef.current;
     
     cards.forEach((card, index) => {
@@ -88,8 +98,8 @@ const Attorneys = () => {
             Our team is focused on delivering commercial solutions to legal challenges. We understand the industries and sectors our clients operate in, applying years of experience to advise leading companies worldwide.
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 lg:gap-8">
-          {attorneys.map((attorney, index) => (
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 lg:gap-8">
+          {attorneys.slice(0, isMobile ? 6 : attorneys.length).map((attorney, index) => (
             <div
               key={index}
               ref={(el) => (cardsRef.current[index] = el)}

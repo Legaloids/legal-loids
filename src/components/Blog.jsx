@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -8,6 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 const Blog = () => {
   const sectionRef = useRef(null);
   const cardsRef = useRef([]);
+  const [isMobile, setIsMobile] = useState(false);
 
   const blogPosts = [
     {
@@ -32,6 +33,15 @@ const Blog = () => {
       excerpt: 'Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however',
     },
   ];
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     const cards = cardsRef.current;
@@ -69,8 +79,8 @@ const Blog = () => {
             One day however
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 lg:gap-8">
-          {blogPosts.map((post, index) => (
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 lg:gap-8">
+          {blogPosts.slice(0, isMobile ? 6 : blogPosts.length).map((post, index) => (
             <article
               key={index}
               ref={(el) => (cardsRef.current[index] = el)}

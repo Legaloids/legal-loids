@@ -11,6 +11,7 @@ const WonPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const heroRef = useRef(null);
   const casesRef = useRef([]);
+  const [isMobile, setIsMobile] = useState(false);
 
   const wonCases = [
     { name: 'Craig David', description: 'Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life', result: 'Case won' },
@@ -23,6 +24,15 @@ const WonPage = () => {
     { name: 'Ariel Kris', description: 'Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life', result: 'Case won' },
     { name: 'Derick Melby', description: 'Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life', result: 'Case won' },
   ];
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     if (heroRef.current) {
@@ -79,8 +89,8 @@ const WonPage = () => {
       {/* Won Cases Grid */}
       <section className="py-12 sm:py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 lg:gap-8">
-            {wonCases.map((caseItem, index) => (
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 lg:gap-8">
+            {wonCases.slice(0, isMobile ? 6 : wonCases.length).map((caseItem, index) => (
               <div
                 key={index}
                 ref={(el) => (casesRef.current[index] = el)}
