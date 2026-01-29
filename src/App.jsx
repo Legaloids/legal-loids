@@ -59,7 +59,7 @@ function AppContent() {
       )}
 
       <Navbar />
-      <main className="pt-20">
+      <main className={`pt-20 ${location.pathname === '/' ? 'bg-black md:bg-white' : ''}`}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
