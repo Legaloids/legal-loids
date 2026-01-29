@@ -73,12 +73,23 @@ const HomePage = () => {
 
   // Initialize all slides on mount
   useEffect(() => {
+    // Check if device is mobile
+    const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+                           ('ontouchstart' in window) || 
+                           (navigator.maxTouchPoints > 0);
+    
     slidesRef.current.forEach((slide, index) => {
       if (slide) {
-        if (index === 0) {
+        if (isMobileDevice) {
+          // On mobile: all slides should be visible
           gsap.set(slide, { opacity: 1, y: 0 });
         } else {
-          gsap.set(slide, { opacity: 0, y: 0 });
+          // On desktop: only first slide visible
+          if (index === 0) {
+            gsap.set(slide, { opacity: 1, y: 0 });
+          } else {
+            gsap.set(slide, { opacity: 0, y: 0 });
+          }
         }
       }
     });
@@ -131,6 +142,11 @@ const HomePage = () => {
     // Store the previous active section before it changes
     const prevSection = previousSection;
     
+    // Check if device is mobile
+    const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+                           ('ontouchstart' in window) || 
+                           (navigator.maxTouchPoints > 0);
+    
     // Use requestAnimationFrame to ensure DOM is ready
     requestAnimationFrame(() => {
       const currentSlide = slidesRef.current[activeSection];
@@ -138,12 +154,68 @@ const HomePage = () => {
       
       if (!currentSlide) return;
 
+      // On mobile: skip image animations, only animate content
+      if (isMobileDevice) {
+        // Ensure all slides are visible on mobile (no opacity 0)
+        slidesRef.current.forEach((slide) => {
+          if (slide) {
+            gsap.set(slide, { opacity: 1, y: 0 });
+          }
+        });
+
+        // Get current slide content elements
+        const title = currentSlide.querySelector('.section-title');
+        const subtitle = currentSlide.querySelector('.section-subtitle');
+        const description = currentSlide.querySelector('.section-description');
+        const button = currentSlide.querySelector('.section-button');
+        const textElements = [title, subtitle, description].filter(Boolean);
+
+        // Kill any existing animations on current slide content
+        gsap.killTweensOf([...textElements, button].filter(Boolean));
+
+        // Animate content only on mobile
+        const elementStartY = 30;
+        gsap.fromTo(
+          textElements,
+          { opacity: 0, y: elementStartY },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: 'power2.out',
+            stagger: 0.15,
+            immediateRender: false,
+          }
+        );
+
+        // Animate the button
+        if (button) {
+          gsap.fromTo(
+            button,
+            { opacity: 0, y: elementStartY },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.8,
+              ease: 'power2.out',
+              immediateRender: false,
+              delay: 0.35,
+            }
+          );
+        }
+
+        // Update previous section state
+        setPreviousSection(activeSection);
+        return;
+      }
+
+      // Desktop animations (existing code)
       // Determine animation direction based on scroll direction
       const isScrollingDown = scrollDirectionRef.current === 'down';
-      const slideStartY = isScrollingDown ? -200 : 200; // Increased distance for longer travel
-      const slideEndY = isScrollingDown ? 200 : -200; // Opposite direction for exit
-      const elementStartY = isScrollingDown ? -60 : 60; // Increased distance for content
-      const elementEndY = isScrollingDown ? 60 : -60; // Opposite direction for exit
+      const slideStartY = isScrollingDown ? -200 : 200;
+      const slideEndY = isScrollingDown ? 200 : -200;
+      const elementStartY = isScrollingDown ? -60 : 60;
+      const elementEndY = isScrollingDown ? 60 : -60;
 
       // Animate the exiting slide out (if it exists and is different from current)
       if (previousSlide && prevSection !== activeSection) {
@@ -224,7 +296,6 @@ const HomePage = () => {
           ease: 'power2.out',
           stagger: 0.15,
           immediateRender: false,
-           // Start appearing shortly after image starts (0.3s delay)
         }
       );
 
