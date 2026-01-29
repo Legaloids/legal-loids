@@ -61,9 +61,9 @@ const ExpertisePage = () => {
             y: 0,
             opacity: 1,
             scale: 1,
-            duration: 0.8,
-            delay: index * 0.08,
-            ease: 'power3.out',
+            duration: 0.5,
+            delay: index * 0.04,
+            ease: 'power2.out',
             scrollTrigger: {
               trigger: card,
               start: 'top 85%',
@@ -86,9 +86,9 @@ const ExpertisePage = () => {
           {
             x: 0,
             opacity: 1,
-            duration: 0.8,
-            delay: index * 0.1,
-            ease: 'power3.out',
+            duration: 0.5,
+            delay: index * 0.05,
+            ease: 'power2.out',
             scrollTrigger: {
               trigger: card,
               start: 'top 85%',
