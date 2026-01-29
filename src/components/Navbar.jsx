@@ -344,10 +344,10 @@ const Navbar = () => {
                   +91-120-4157858
                 </a>
                 <a
-                  href="mailto:admin@legaloids.com"
+                  href="mailto:legaloids@gmail.com"
                   className="text-sm hover:text-white transition-colors duration-200 block"
                 >
-                  admin@legaloids.com
+                  legaloids@gmail.com
                 </a>
               </div>
             </div>

@@ -83,8 +83,8 @@ const IntroSection = () => {
             <h2 className="text-3xl font-bold mb-4">Call now (+1) 123-456-7890</h2>
             <p className="text-lg mb-4">
               Email us at{' '}
-              <a href="mailto:info@yourwebsite.com" className="underline hover:text-primary-200 transition-colors">
-                info@yourwebsite.com
+              <a href="mailto:legaloids@gmail.com" className="underline hover:text-primary-200 transition-colors">
+                legaloids@gmail.com
               </a>
             </p>
             <p className="text-lg leading-relaxed">
