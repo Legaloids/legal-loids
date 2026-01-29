@@ -105,7 +105,7 @@ const HomePage = () => {
       isThrottled = true;
       setTimeout(() => {
         isThrottled = false;
-      }, 2200); // close to animation duration
+      }, 800); // Reduced throttle time to allow faster scrolling
 
       if (event.deltaY > 0) {
         // scroll down -> next slide
@@ -156,21 +156,21 @@ const HomePage = () => {
         // Kill any existing animations on the previous slide
         gsap.killTweensOf([previousSlide, ...prevElements]);
 
-        // Animate the previous slide out
+        // Animate the previous slide out (clean, sharp transition)
         gsap.to(previousSlide, {
           opacity: 0,
           y: slideEndY,
-          duration: 2.0,
-          ease: 'power2.out',
+          duration: 0.6,
+          ease: 'power3.in',
         });
 
-        // Animate the previous slide's content out
+        // Animate the previous slide's content out (faster)
         gsap.to(prevElements, {
           opacity: 0,
           y: elementEndY,
-          duration: 2.0,
+          duration: 1.0,
           ease: 'power2.out',
-          stagger: 0.2,
+          stagger: 0.1,
         });
       }
 
@@ -200,34 +200,35 @@ const HomePage = () => {
       // Kill any existing animations on current slide
       gsap.killTweensOf([currentSlide, ...allElements]);
 
-      // Animate the current slide in based on scroll direction
+      // Animate the current slide in (clean, sharp image transition)
       gsap.fromTo(
         currentSlide,
         { opacity: 0, y: slideStartY },
         {
           opacity: 1,
           y: 0,
-          duration: 2.0,
-          ease: 'power2.out',
+          duration: 0.6,
+          ease: 'power3.out',
           immediateRender: false,
         }
       );
 
-      // Animate the text content (title, subtitle, description) with stagger
+      // Content appears fast once image is visible
       gsap.fromTo(
         textElements,
         { opacity: 0, y: elementStartY },
         {
           opacity: 1,
           y: 0,
-          duration: 2.0,
+          duration: 0.6,
           ease: 'power2.out',
-          stagger: 0.2,
+          stagger: 0.15,
           immediateRender: false,
+           // Start appearing shortly after image starts (0.3s delay)
         }
       );
 
-      // Animate the button at the same time as the subtitle (appears earlier)
+      // Animate the button quickly after content
       if (button) {
         gsap.fromTo(
           button,
@@ -235,10 +236,9 @@ const HomePage = () => {
           {
             opacity: 1,
             y: 0,
-            duration: 2.0,
+            duration: 0.6,
             ease: 'power2.out',
             immediateRender: false,
-            delay: 0.2, // Start with subtitle (second element)
           }
         );
       }
