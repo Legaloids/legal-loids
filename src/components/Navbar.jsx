@@ -338,10 +338,10 @@ const Navbar = () => {
               </div>
               <div>
                 <a
-                  href="tel:+911204157858"
+                  href="tel:+918881668058"
                   className="text-sm hover:text-white transition-colors duration-200 block mb-1"
                 >
-                  +91-120-4157858
+                  088816 68058
                 </a>
                 <a
                   href="mailto:legaloids@gmail.com"

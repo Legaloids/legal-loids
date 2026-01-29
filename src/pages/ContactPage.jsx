@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ConsultationForm from '../components/ConsultationForm';
 import IntroSection from '../components/IntroSection';
 import GoToTop from '../components/GoToTop';
+import ContactMap from '../components/ContactMap';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -107,10 +108,7 @@ const ContactPage = () => {
                   </div>
                   <div>
                     <h3 className="text-sm sm:text-base font-semibold text-gray-900 mb-1">Phone</h3>
-                    <a href="tel:+911204157858" className="text-xs sm:text-sm text-primary-600 hover:text-primary-700 block">
-                      +91-120-4157858
-                    </a>
-                    <a href="tel:+918881668058" className="text-xs sm:text-sm text-primary-600 hover:text-primary-700 block mt-1">
+                    <a href="tel:+918881668058" className="text-xs sm:text-sm text-primary-600 hover:text-primary-700 block">
                       +91-8881668058
                     </a>
                   </div>
@@ -228,10 +226,14 @@ const ContactPage = () => {
         </div>
       </section>
 
-      {/* Map Section */}
-      <section className="h-64 sm:h-80 md:h-96 bg-gray-200">
-        <div className="h-full w-full flex items-center justify-center text-gray-500">
-          <p className="text-sm sm:text-base">Map Integration Area</p>
+      {/* Map Section – Noida Head Office */}
+      <section className="py-12 sm:py-16 md:py-20 bg-gray-50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 sm:mb-6">Find Us</h2>
+          <p className="text-sm sm:text-base text-gray-600 mb-6 max-w-2xl">
+            Head Office: A-59, Sector-27, Noida-201301, India
+          </p>
+          <ContactMap />
         </div>
       </section>
 

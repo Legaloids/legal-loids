@@ -25,3 +25,35 @@
     text-wrap: balance;
   }
 }
+
+/* Leaflet mobile responsiveness */
+@media (max-width: 768px) {
+  .leaflet-control-zoom {
+    margin: 10px !important;
+  }
+  
+  .leaflet-control-zoom a {
+    width: 30px !important;
+    height: 30px !important;
+    line-height: 30px !important;
+    font-size: 18px !important;
+  }
+  
+  .leaflet-popup-content-wrapper {
+    padding: 8px 12px !important;
+    font-size: 14px !important;
+  }
+  
+  .leaflet-popup-content {
+    margin: 8px 12px !important;
+  }
+  
+  .leaflet-popup-tip {
+    width: 12px !important;
+    height: 12px !important;
+  }
+  
+  .leaflet-container {
+    font-size: 12px !important;
+  }
+}

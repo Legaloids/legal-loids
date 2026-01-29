@@ -121,8 +121,8 @@ const Footer = () => {
                 C-32, Subhash Nagar, Agra-282010, India
               </li>
               <li>
-                <a href="tel:+911204157858" className="text-primary-400 hover:text-primary-300 transition-colors duration-200 block">
-                  +91-120-4157858
+                <a href="tel:+918881668058" className="text-primary-400 hover:text-primary-300 transition-colors duration-200 block">
+                  088816 68058
                 </a>
               </li>
               <li>
