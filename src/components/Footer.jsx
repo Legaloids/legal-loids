@@ -8,7 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 const Footer = () => {
   const footerRef = useRef(null);
   const sectionsRef = useRef([]);
-  const currentYear = new Date().getFullYear();
+  const currentYear = 2026;
 
   useEffect(() => {
     const footer = footerRef.current;
@@ -149,19 +149,15 @@ const Footer = () => {
               Copyright &copy; {currentYear} Legaloids Law Firm. All rights reserved.
             </p>
             <div className="flex space-x-2 sm:space-x-3">
-              {['Twitter', 'Facebook', 'LinkedIn', 'Instagram'].map((social, index) => (
-                <a
-                  key={index}
-                  href="#!"
-                  onClick={(e) => e.preventDefault()}
-                  className="w-8 h-8 sm:w-9 sm:h-9 bg-gray-800 hover:bg-primary-600 rounded-md flex items-center justify-center transition-all duration-300 transform hover:scale-105"
-                  aria-label={social}
-                >
-                  <span className="text-gray-400 hover:text-white transition-colors text-[10px] sm:text-xs font-semibold">
-                    {social[0]}
-                  </span>
-                </a>
-              ))}
+              <a
+                href="https://www.linkedin.com/company/legaloids-law-offices/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-8 h-8 sm:w-9 sm:h-9 bg-gray-800 hover:bg-primary-600 rounded-md flex items-center justify-center transition-all duration-300 transform hover:scale-105"
+                aria-label="LinkedIn"
+              >
+                <span className="text-gray-400 hover:text-white transition-colors text-[10px] sm:text-xs font-semibold">in</span>
+              </a>
             </div>
           </div>
         </div>

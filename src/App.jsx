@@ -21,6 +21,11 @@ function AppContent() {
   const [isLoading, setIsLoading] = useState(true);
   const loaderRef = React.useRef(null);
 
+  // Scroll to top when navigating to a new page
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   useEffect(() => {
     const timer = setTimeout(() => {
       if (loaderRef.current) {

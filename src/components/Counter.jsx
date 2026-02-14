@@ -4,8 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { 
   UserIcon, 
   BuildingOfficeIcon, 
-  ScaleIcon, 
-  TrophyIcon 
+  DocumentTextIcon,
 } from '@heroicons/react/24/outline';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -14,27 +13,21 @@ const Counter = () => {
   const [counters, setCounters] = useState([
     { 
       value: 0, 
-      target: 2893, 
-      label: 'Our Lawyer', 
+      target: 15, 
+      label: 'Lawyers', 
       icon: UserIcon 
     },
     { 
       value: 0, 
-      target: 291, 
-      label: 'Our Clients', 
+      target: 300, 
+      label: 'Clients', 
       icon: BuildingOfficeIcon 
     },
     { 
       value: 0, 
-      target: 952, 
-      label: 'Successful Case', 
-      icon: ScaleIcon 
-    },
-    { 
-      value: 0, 
-      target: 1921, 
-      label: 'Honor & Awards', 
-      icon: TrophyIcon 
+      target: 1100, 
+      label: 'Legal & Compliance Advisories', 
+      icon: DocumentTextIcon 
     },
   ]);
   const counterRef = useRef(null);
@@ -116,7 +109,7 @@ const Counter = () => {
     >
       <div className="absolute inset-0 bg-primary-900/85"></div>
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 lg:gap-12 xl:gap-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-12 xl:gap-16">
           {counters.map((counter, index) => {
             const IconComponent = counter.icon;
             return (
