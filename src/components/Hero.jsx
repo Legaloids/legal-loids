@@ -7,21 +7,22 @@ const Hero = () => {
   const textRef = useRef(null);
   const slidesRef = useRef([]);
 
+  // Different hero backgrounds – professional legal/corporate imagery (replace with your own /images/ paths if preferred)
   const slides = [
     {
-      image: '/images/hero_1.jpg',
+      image: 'https://images.unsplash.com/photo-1589829545856-d10d97cf92de?auto=format&fit=crop&w=1920&q=80',
       title: 'Premier Business Law Consulting Firm',
       subtitle: 'Delivering integrated legal solutions tailored to complex commercial challenges',
       buttonText: 'Schedule Consultation',
     },
     {
-      image: '/images/hero_3.jpg',
+      image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&q=80',
       title: 'Trusted Legal Partners',
       subtitle: 'Multidisciplinary team combining deep industry knowledge with strategic insights',
       buttonText: 'Our Expertise',
     },
     {
-      image: '/images/hero_2.jpg',
+      image: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1920&q=80',
       title: 'Your Success, Our Commitment',
       subtitle: 'Corporate law, litigation, and advisory services for businesses in India and internationally',
       buttonText: 'Contact Us',

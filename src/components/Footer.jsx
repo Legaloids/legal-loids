@@ -126,8 +126,8 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="mailto:legaloids@gmail.com" className="text-primary-400 hover:text-primary-300 transition-colors duration-200 block break-all">
-                  legaloids@gmail.com
+                <a href="mailto:admin@legaloids.com" className="text-primary-400 hover:text-primary-300 transition-colors duration-200 block break-all">
+                  admin@legaloids.com
                 </a>
               </li>
             </ul>
