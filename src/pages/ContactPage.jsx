@@ -5,6 +5,7 @@ import ConsultationForm from '../components/ConsultationForm';
 import IntroSection from '../components/IntroSection';
 import GoToTop from '../components/GoToTop';
 import ContactMap from '../components/ContactMap';
+import { sendContactForm } from '../lib/emailjs';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -16,6 +17,8 @@ const ContactPage = () => {
     subject: '',
     message: '',
   });
+  const [submitStatus, setSubmitStatus] = useState(null);
+  const [errorMessage, setErrorMessage] = useState('');
   const heroRef = useRef(null);
   const contactInfoRef = useRef(null);
 
@@ -37,16 +40,24 @@ const ContactPage = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    setFormData({
-      fname: '',
-      lname: '',
-      email: '',
-      subject: '',
-      message: '',
-    });
+    setSubmitStatus('sending');
+    setErrorMessage('');
+    try {
+      await sendContactForm(formData);
+      setSubmitStatus('success');
+      setFormData({
+        fname: '',
+        lname: '',
+        email: '',
+        subject: '',
+        message: '',
+      });
+    } catch (err) {
+      setSubmitStatus('error');
+      setErrorMessage(err.message || 'Failed to send message. Please try again.');
+    }
   };
 
   return (
@@ -214,11 +225,22 @@ const ContactPage = () => {
                   ></textarea>
                 </div>
 
+                {submitStatus === 'success' && (
+                  <p className="text-green-600 text-sm sm:text-base font-medium">
+                    Thank you. Your message has been sent successfully.
+                  </p>
+                )}
+                {submitStatus === 'error' && (
+                  <p className="text-red-600 text-sm sm:text-base font-medium">
+                    {errorMessage}
+                  </p>
+                )}
                 <button
                   type="submit"
-                  className="w-full px-6 sm:px-8 py-3 sm:py-4 bg-primary-600 hover:bg-primary-700 text-white text-sm sm:text-base font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+                  disabled={submitStatus === 'sending'}
+                  className="w-full px-6 sm:px-8 py-3 sm:py-4 bg-primary-600 hover:bg-primary-700 disabled:bg-primary-400 disabled:cursor-not-allowed text-white text-sm sm:text-base font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
                 >
-                  Send Message
+                  {submitStatus === 'sending' ? 'Sending...' : 'Send Message'}
                 </button>
               </form>
             </div>
