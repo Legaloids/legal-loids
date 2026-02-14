@@ -142,50 +142,52 @@ const Attorneys = () => {
   const otherAttorneys = attorneys.slice(1);
 
   return (
-    <section ref={sectionRef} className="py-12 sm:py-16 md:py-20 bg-gray-50">
+    <section ref={sectionRef} className="py-8 sm:py-16 md:py-20 bg-gray-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div ref={headerRef} className="text-center mb-10 sm:mb-12 md:mb-16">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 sm:mb-4 px-4">Our Attorneys</h2>
-          <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-3xl mx-auto px-4">
+        <div ref={headerRef} className="text-center mb-6 sm:mb-12 md:mb-16">
+          <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-2 sm:mb-4 px-2">Our Attorneys</h2>
+          <p className="text-xs sm:text-base md:text-lg text-gray-600 max-w-3xl mx-auto px-2 sm:px-4">
             Our team is focused on delivering commercial solutions to legal challenges. We understand the industries and sectors our clients operate in, applying years of experience to advise leading companies worldwide.
           </p>
         </div>
 
         {/* Founder – horizontal card with photo and social (larger) */}
-        <div className="max-w-6xl mx-auto mb-12 sm:mb-16 md:mb-20">
+        <div className="max-w-sm sm:max-w-2xl md:max-w-6xl mx-auto mb-8 sm:mb-16 md:mb-20">
           <div
             ref={founderWrapRef}
-            className="bg-white rounded-2xl shadow-lg hover:shadow-2xl overflow-hidden flex flex-col md:flex-row group"
+            className="bg-white rounded-xl sm:rounded-2xl shadow-lg overflow-hidden flex flex-col md:flex-row group"
             onMouseEnter={(e) => {
               gsap.to(e.currentTarget, { y: -8, duration: 0.4, ease: 'power2.out' });
-              gsap.to(e.currentTarget.querySelector('.founder-img'), { scale: 1.06, duration: 0.5, ease: 'power2.out' });
+              const img = e.currentTarget.querySelector('.founder-img');
+              if (img) gsap.to(img, { scale: 1.06, duration: 0.5, ease: 'power2.out' });
             }}
             onMouseLeave={(e) => {
               gsap.to(e.currentTarget, { y: 0, duration: 0.35, ease: 'power2.out' });
-              gsap.to(e.currentTarget.querySelector('.founder-img'), { scale: 1, duration: 0.4, ease: 'power2.out' });
+              const img = e.currentTarget.querySelector('.founder-img');
+              if (img) gsap.to(img, { scale: 1, duration: 0.4, ease: 'power2.out' });
             }}
           >
-            <div ref={founderImgRef} className="relative overflow-hidden flex-shrink-0 w-full md:w-2/5 min-h-[280px] sm:min-h-[320px] md:min-h-[380px]">
+            <div ref={founderImgRef} className="relative overflow-hidden flex-shrink-0 w-full md:w-2/5 aspect-[4/5] md:aspect-auto md:min-h-[380px]">
               <img
                 src={founder.image}
                 alt={founder.name}
-                className="founder-img w-full h-64 sm:h-80 md:h-full md:min-h-[380px] object-cover will-change-transform"
+                className="founder-img w-full h-full object-cover object-top will-change-transform"
               />
               <div className="absolute inset-0 bg-primary-600/0 group-hover:bg-primary-600/30 transition-colors duration-300" />
             </div>
-            <div ref={founderContentRef} className="p-6 sm:p-8 md:p-10 lg:p-12 flex flex-col justify-center text-left">
-              <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-2 sm:mb-3">{founder.name}</h3>
-              <p className="text-base sm:text-lg md:text-xl text-primary-600 font-semibold mb-4 sm:mb-5">{founder.role}</p>
-              <p className="text-sm sm:text-base md:text-lg text-gray-600 mb-6 sm:mb-8">{founder.description}</p>
+            <div ref={founderContentRef} className="p-4 sm:p-6 md:p-10 lg:p-12 flex flex-col justify-center text-left">
+              <h3 className="text-lg sm:text-xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-1 sm:mb-2">{founder.name}</h3>
+              <p className="text-sm sm:text-base md:text-xl text-primary-600 font-semibold mb-2 sm:mb-4">{founder.role}</p>
+              <p className="text-xs sm:text-sm md:text-lg text-gray-600 mb-3 sm:mb-6 md:mb-8 line-clamp-4 sm:line-clamp-none">{founder.description}</p>
               <div className="flex justify-start">
                 <a
                   href="https://www.linkedin.com/in/shobhit-kulshrestha-4a881617/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 bg-gray-100 hover:bg-primary-600 rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110"
+                  className="w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-gray-100 hover:bg-primary-600 rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110"
                   aria-label="LinkedIn"
                 >
-                  <span className="text-xs sm:text-sm text-gray-600 hover:text-white transition-colors font-semibold">in</span>
+                  <span className="text-xs text-gray-600 hover:text-white transition-colors font-semibold">in</span>
                 </a>
               </div>
             </div>

@@ -97,7 +97,7 @@ const ContactPage = () => {
                   <div>
                     <h3 className="text-sm sm:text-base font-semibold text-gray-900 mb-1">Head Office</h3>
                     <p className="text-xs sm:text-sm text-gray-600">A-59, Sector-27,<br />Noida-201301, India</p>
-                    <p className="text-xs sm:text-sm text-gray-600 mt-2 sm:mt-3">
+                    {/* <p className="text-xs sm:text-sm text-gray-600 mt-2 sm:mt-3">
                       <strong>New Delhi Office:</strong><br />
                       A2/69 – Manu Apartment,<br />
                       Mayur Vihar, New Delhi,<br />
@@ -107,7 +107,7 @@ const ContactPage = () => {
                       <strong>Associate Office:</strong><br />
                       C-32, Subhash Nagar,<br />
                       Agra-282010, India
-                    </p>
+                    </p> */}
                   </div>
                 </div>
 

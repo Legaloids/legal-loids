@@ -119,8 +119,8 @@ const PeoplePage = () => {
             {[
               { number: '25', label: 'Attorneys' },
               { number: '5', label: 'Partners' },
-              { number: '15', label: 'Practice Areas' },
-              { number: '40', label: 'Years Experience' },
+              { number: '15+', label: 'Practice Areas' },
+              { number: '40+', label: 'Years Experience' },
             ].map((stat, index) => (
               <div
                 key={index}
