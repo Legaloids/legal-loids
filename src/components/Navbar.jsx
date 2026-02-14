@@ -240,7 +240,7 @@ const Navbar = () => {
       {/* Right Side Navigation Panel */}
       <nav
         ref={menuRef}
-        className={`fixed top-0 right-0 h-full w-96 max-w-[90vw] bg-gradient-to-b from-primary-900 via-primary-800 to-primary-900 shadow-2xl z-50 overflow-y-auto ${
+        className={`fixed top-0 right-0 h-full w-96 max-w-[90vw] bg-gradient-to-b from-primary-900 via-primary-800 to-primary-900 shadow-2xl z-[60] overflow-y-auto ${
           isMenuOpen ? '' : 'pointer-events-none'
         }`}
       >

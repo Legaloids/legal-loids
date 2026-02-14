@@ -12,6 +12,8 @@ const HomePage = () => {
   const [activeSection, setActiveSection] = useState(0);
   const [previousSection, setPreviousSection] = useState(0);
   const scrollDirectionRef = useRef('down'); // Track scroll direction
+  const lastSectionChangeRef = useRef(0);   // Cooldown: one section per scroll gesture
+  const scrollLockRef = useRef(false);      // Block second event in same gesture
 
   const sections = [
     {
@@ -107,25 +109,29 @@ const HomePage = () => {
       return;
     }
 
-    let isThrottled = false;
+    const COOLDOWN_MS = 800; // One section per scroll — wait for gesture to finish
 
     const handleWheel = (event) => {
       event.preventDefault();
 
-      if (isThrottled) return;
-      isThrottled = true;
-      setTimeout(() => {
-        isThrottled = false;
-      }, 800); // Reduced throttle time to allow faster scrolling
+      if (scrollLockRef.current) return;
 
-      if (event.deltaY > 0) {
-        // scroll down -> next slide
+      const now = Date.now();
+      if (now - lastSectionChangeRef.current < COOLDOWN_MS) return;
+
+      const delta = event.deltaY;
+      if (Math.abs(delta) < 15) return; // Ignore tiny jitters
+
+      scrollLockRef.current = true;
+      lastSectionChangeRef.current = now;
+      setTimeout(() => { scrollLockRef.current = false; }, COOLDOWN_MS);
+
+      if (delta > 0) {
         scrollDirectionRef.current = 'down';
         setActiveSection((prev) =>
           prev < sections.length - 1 ? prev + 1 : prev
         );
-      } else if (event.deltaY < 0) {
-        // scroll up -> previous slide
+      } else {
         scrollDirectionRef.current = 'up';
         setActiveSection((prev) => (prev > 0 ? prev - 1 : prev));
       }
@@ -318,7 +324,7 @@ const HomePage = () => {
       setPreviousSection(activeSection);
     });
   }, [activeSection]);
-9
+
   // Check if device is mobile for conditional rendering
   const [isMobile, setIsMobile] = React.useState(false);
 
