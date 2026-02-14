@@ -179,7 +179,7 @@ const Attorneys = () => {
               <p className="text-sm sm:text-base md:text-lg text-gray-600 mb-6 sm:mb-8">{founder.description}</p>
               <div className="flex justify-start">
                 <a
-                  href="https://www.linkedin.com/company/legaloids-law-offices/"
+                  href="https://www.linkedin.com/in/shobhit-kulshrestha-4a881617/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 bg-gray-100 hover:bg-primary-600 rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110"

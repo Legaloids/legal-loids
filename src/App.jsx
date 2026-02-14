@@ -7,14 +7,11 @@ import Disclaimer from './components/Disclaimer';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
-import BlogPage from './pages/BlogPage';
-import BlogSinglePage from './pages/BlogSinglePage';
 import PracticePage from './pages/PracticePage';
 import ExpertisePage from './pages/ExpertisePage';
 import PeoplePage from './pages/PeoplePage';
 import NewsEventsPage from './pages/NewsEventsPage';
 import LegacyPage from './pages/LegacyPage';
-import ThoughtLeadershipPage from './pages/ThoughtLeadershipPage';
 
 function AppContent() {
   const location = useLocation();
@@ -68,14 +65,11 @@ function AppContent() {
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
-          <Route path="/blog" element={<BlogPage />} />
-          <Route path="/blog-single" element={<BlogSinglePage />} />
           <Route path="/practice" element={<PracticePage />} />
           <Route path="/expertise" element={<ExpertisePage />} />
           <Route path="/people" element={<PeoplePage />} />
           <Route path="/news-events" element={<NewsEventsPage />} />
           <Route path="/legacy" element={<LegacyPage />} />
-          <Route path="/thought-leadership" element={<ThoughtLeadershipPage />} />
         </Routes>
       </main>
 

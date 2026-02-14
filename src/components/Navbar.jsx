@@ -16,19 +16,18 @@ const Navbar = () => {
     { label: 'People', path: '/people' },
     { label: 'News & Events', path: '/news-events' },
     { label: 'Legacy', path: '/legacy' },
-    { label: 'Thought Leadership', path: '/thought-leadership' },
     { label: 'Practice Areas', path: '/practice' },
-    {
-      label: 'Blog',
-      path: '/blog',
-      hasDropdown: true,
-      dropdownItems: [
-        { label: 'All Posts', path: '/blog' },
-        { label: 'Legal Updates', path: '/blog?category=legal-updates' },
-        { label: 'Case Studies', path: '/blog?category=case-studies' },
-        { label: 'Podcast', path: '/blog?category=podcast' },
-      ],
-    },
+    // {
+    //   label: 'Blog',
+    //   path: '/blog',
+    //   hasDropdown: true,
+    //   dropdownItems: [
+    //     { label: 'All Posts', path: '/blog' },
+    //     { label: 'Legal Updates', path: '/blog?category=legal-updates' },
+    //     { label: 'Case Studies', path: '/blog?category=case-studies' },
+    //     { label: 'Podcast', path: '/blog?category=podcast' },
+    //   ],
+    // },
     { label: 'About', path: '/about' },
     { label: 'Contact', path: '/contact' },
   ];
