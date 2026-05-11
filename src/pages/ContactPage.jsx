@@ -5,6 +5,7 @@ import ConsultationForm from '../components/ConsultationForm';
 import IntroSection from '../components/IntroSection';
 import GoToTop from '../components/GoToTop';
 import ContactMap from '../components/ContactMap';
+import { sendContactForm } from '../lib/emailjs';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,9 +14,12 @@ const ContactPage = () => {
     fname: '',
     lname: '',
     email: '',
+    phone: '',
     subject: '',
     message: '',
   });
+  const [submitStatus, setSubmitStatus] = useState(null);
+  const [errorMessage, setErrorMessage] = useState('');
   const heroRef = useRef(null);
   const contactInfoRef = useRef(null);
 
@@ -37,16 +41,25 @@ const ContactPage = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    setFormData({
-      fname: '',
-      lname: '',
-      email: '',
-      subject: '',
-      message: '',
-    });
+    setSubmitStatus('sending');
+    setErrorMessage('');
+    try {
+      await sendContactForm(formData);
+      setSubmitStatus('success');
+      setFormData({
+        fname: '',
+        lname: '',
+        email: '',
+        phone: '',
+        subject: '',
+        message: '',
+      });
+    } catch (err) {
+      setSubmitStatus('error');
+      setErrorMessage(err.message || 'Failed to send message. Please try again.');
+    }
   };
 
   return (
@@ -86,7 +99,7 @@ const ContactPage = () => {
                   <div>
                     <h3 className="text-sm sm:text-base font-semibold text-gray-900 mb-1">Head Office</h3>
                     <p className="text-xs sm:text-sm text-gray-600">A-59, Sector-27,<br />Noida-201301, India</p>
-                    <p className="text-xs sm:text-sm text-gray-600 mt-2 sm:mt-3">
+                    {/* <p className="text-xs sm:text-sm text-gray-600 mt-2 sm:mt-3">
                       <strong>New Delhi Office:</strong><br />
                       A2/69 – Manu Apartment,<br />
                       Mayur Vihar, New Delhi,<br />
@@ -96,7 +109,7 @@ const ContactPage = () => {
                       <strong>Associate Office:</strong><br />
                       C-32, Subhash Nagar,<br />
                       Agra-282010, India
-                    </p>
+                    </p> */}
                   </div>
                 </div>
 
@@ -122,8 +135,8 @@ const ContactPage = () => {
                   </div>
                   <div>
                     <h3 className="text-sm sm:text-base font-semibold text-gray-900 mb-1">Email</h3>
-                    <a href="mailto:legaloids@gmail.com" className="text-xs sm:text-sm text-primary-600 hover:text-primary-700 break-all">
-                      legaloids@gmail.com
+                    <a href="mailto:admin@legaloids.com" className="text-xs sm:text-sm text-primary-600 hover:text-primary-700 break-all">
+                      admin@legaloids.com
                     </a>
                   </div>
                 </div>
@@ -190,6 +203,20 @@ const ContactPage = () => {
 
                 <div>
                   <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    placeholder="Your phone number"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    autoComplete="tel"
+                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <input
                     type="text"
                     id="subject"
                     name="subject"
@@ -214,11 +241,22 @@ const ContactPage = () => {
                   ></textarea>
                 </div>
 
+                {submitStatus === 'success' && (
+                  <p className="text-green-600 text-sm sm:text-base font-medium">
+                    Thank you. Your message has been sent successfully.
+                  </p>
+                )}
+                {submitStatus === 'error' && (
+                  <p className="text-red-600 text-sm sm:text-base font-medium">
+                    {errorMessage}
+                  </p>
+                )}
                 <button
                   type="submit"
-                  className="w-full px-6 sm:px-8 py-3 sm:py-4 bg-primary-600 hover:bg-primary-700 text-white text-sm sm:text-base font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+                  disabled={submitStatus === 'sending'}
+                  className="w-full px-6 sm:px-8 py-3 sm:py-4 bg-primary-600 hover:bg-primary-700 disabled:bg-primary-400 disabled:cursor-not-allowed text-white text-sm sm:text-base font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
                 >
-                  Send Message
+                  {submitStatus === 'sending' ? 'Sending...' : 'Send Message'}
                 </button>
               </form>
             </div>

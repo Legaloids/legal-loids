@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { sendContactForm } from '../lib/emailjs';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -9,9 +10,12 @@ const ConsultationForm = () => {
     fname: '',
     lname: '',
     email: '',
+    phone: '',
     subject: '',
     message: '',
   });
+  const [submitStatus, setSubmitStatus] = useState(null); // null | 'sending' | 'success' | 'error'
+  const [errorMessage, setErrorMessage] = useState('');
 
   const sectionRef = useRef(null);
   const formRef = useRef(null);
@@ -65,27 +69,34 @@ const ConsultationForm = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    
-    // Animate form submission
-    gsap.to(formRef.current, {
-      scale: 0.95,
-      duration: 0.1,
-      yoyo: true,
-      repeat: 1,
-      ease: 'power2.inOut',
-    });
-
-    // Reset form
-    setFormData({
-      fname: '',
-      lname: '',
-      email: '',
-      subject: '',
-      message: '',
-    });
+    setSubmitStatus('sending');
+    setErrorMessage('');
+    try {
+      await sendContactForm(formData);
+      setSubmitStatus('success');
+      setFormData({
+        fname: '',
+        lname: '',
+        email: '',
+        phone: '',
+        subject: '',
+        message: '',
+      });
+      if (formRef.current) {
+        gsap.to(formRef.current, {
+          scale: 0.98,
+          duration: 0.1,
+          yoyo: true,
+          repeat: 1,
+          ease: 'power2.inOut',
+        });
+      }
+    } catch (err) {
+      setSubmitStatus('error');
+      setErrorMessage(err.message || 'Failed to send message. Please try again.');
+    }
   };
 
   return (
@@ -148,6 +159,22 @@ const ConsultationForm = () => {
               </div>
 
               <div ref={(el) => (inputsRef.current[3] = el)}>
+                <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-2">
+                  Phone
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  autoComplete="tel"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
+                  required
+                />
+              </div>
+
+              <div ref={(el) => (inputsRef.current[4] = el)}>
                 <label htmlFor="subject" className="block text-sm font-semibold text-gray-700 mb-2">
                   Subject
                 </label>
@@ -162,7 +189,7 @@ const ConsultationForm = () => {
                 />
               </div>
 
-              <div ref={(el) => (inputsRef.current[4] = el)}>
+              <div ref={(el) => (inputsRef.current[5] = el)}>
                 <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2">
                   Message
                 </label>
@@ -177,18 +204,30 @@ const ConsultationForm = () => {
                 ></textarea>
               </div>
 
+              {(submitStatus === 'success' || submitStatus === 'error') && (
+                <p
+                  className={`text-sm font-medium ${
+                    submitStatus === 'success' ? 'text-green-600' : 'text-red-600'
+                  }`}
+                >
+                  {submitStatus === 'success'
+                    ? 'Thank you. Your message has been sent successfully.'
+                    : errorMessage}
+                </p>
+              )}
               <div>
                 <button
                   type="submit"
-                  className="w-full px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+                  disabled={submitStatus === 'sending'}
+                  className="w-full px-8 py-4 bg-primary-600 hover:bg-primary-700 disabled:bg-primary-400 disabled:cursor-not-allowed text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
                   onMouseEnter={(e) => {
-                    gsap.to(e.target, { scale: 1.02, duration: 0.2 });
+                    if (submitStatus !== 'sending') gsap.to(e.target, { scale: 1.02, duration: 0.2 });
                   }}
                   onMouseLeave={(e) => {
                     gsap.to(e.target, { scale: 1, duration: 0.2 });
                   }}
                 >
-                  Send Message
+                  {submitStatus === 'sending' ? 'Sending...' : 'Send Message'}
                 </button>
               </div>
             </form>

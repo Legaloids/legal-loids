@@ -32,11 +32,11 @@ const LegacyPage = () => {
   }, []);
 
   const milestones = [
-    { year: '1920', title: 'Foundation', description: 'Legaloids Law Firm was founded with a vision to provide exceptional legal services.' },
-    { year: '1950', title: 'Expansion', description: 'Expanded operations to serve clients across multiple states.' },
-    { year: '1980', title: 'International', description: 'Opened international offices and began global practice.' },
-    { year: '2000', title: 'Digital Era', description: 'Embraced technology and digital transformation in legal services.' },
-    { year: '2024', title: 'Century Mark', description: 'Celebrating over 100 years of legal excellence and client service.' },
+    { year: '1985', title: 'Foundation', description: 'Legaloids Law Firm was founded with a vision to provide exceptional legal services.' },
+    { year: '1995', title: 'Expansion', description: 'Expanded operations to serve clients across multiple states.' },
+    { year: '2005', title: 'Growth', description: 'Strengthened corporate and litigation practice with a growing team.' },
+    { year: '2015', title: 'Digital Era', description: 'Embraced technology and digital transformation in legal services.' },
+    { year: '2026', title: 'Today', description: 'Decades of legal excellence, trusted by hundreds of clients nationwide.' },
   ];
 
   return (
@@ -53,7 +53,7 @@ const LegacyPage = () => {
             Shaping India's legal past, present and future
           </p>
           <p className="text-sm sm:text-base md:text-lg text-gray-300 mt-3 sm:mt-4 max-w-2xl mx-auto px-4">
-            Our pillars of success are grounded in our century-old heritage and legacy. Our goodwill and motto to provide pragmatic commercial solutions, and exceptional service, to our clients continually drive us to create meaningful and long-term impact.
+            Our pillars of success are grounded in our heritage since 1985. Our goodwill and motto to provide pragmatic commercial solutions, and exceptional service, to our clients continually drive us to create meaningful and long-term impact.
           </p>
         </div>
       </section>

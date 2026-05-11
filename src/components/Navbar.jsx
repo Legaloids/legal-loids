@@ -4,14 +4,11 @@ import { gsap } from 'gsap';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
   const location = useLocation();
   const menuRef = useRef(null);
   const overlayRef = useRef(null);
   const menuItemsRef = useRef([]);
   const toggleButtonRef = useRef(null);
-  const searchRef = useRef(null);
 
   const menuItems = [
     { label: 'Home', path: '/' },
@@ -19,20 +16,19 @@ const Navbar = () => {
     { label: 'People', path: '/people' },
     { label: 'News & Events', path: '/news-events' },
     { label: 'Legacy', path: '/legacy' },
-    { label: 'Thought Leadership', path: '/thought-leadership' },
     { label: 'Practice Areas', path: '/practice' },
-    { label: 'Won Cases', path: '/won' },
-    {
-      label: 'Blog',
-      path: '/blog',
-      hasDropdown: true,
-      dropdownItems: [
-        { label: 'All Posts', path: '/blog' },
-        { label: 'Legal Updates', path: '/blog?category=legal-updates' },
-        { label: 'Case Studies', path: '/blog?category=case-studies' },
-        { label: 'Podcast', path: '/blog?category=podcast' },
-      ],
-    },
+    { label: 'Compliance Desk', path: '/compliance-desk' },
+    // {
+    //   label: 'Blog',
+    //   path: '/blog',
+    //   hasDropdown: true,
+    //   dropdownItems: [
+    //     { label: 'All Posts', path: '/blog' },
+    //     { label: 'Legal Updates', path: '/blog?category=legal-updates' },
+    //     { label: 'Case Studies', path: '/blog?category=case-studies' },
+    //     { label: 'Podcast', path: '/blog?category=podcast' },
+    //   ],
+    // },
     { label: 'About', path: '/about' },
     { label: 'Contact', path: '/contact' },
   ];
@@ -94,17 +90,6 @@ const Navbar = () => {
     }
   }, [isMenuOpen]);
 
-  useEffect(() => {
-    if (isSearchOpen && searchRef.current) {
-      gsap.fromTo(
-        searchRef.current,
-        { scale: 0.9, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 0.3, ease: 'back.out(1.7)' }
-      );
-      searchRef.current.querySelector('input')?.focus();
-    }
-  }, [isSearchOpen]);
-
   const toggleMenu = (e) => {
     e.preventDefault();
     setIsMenuOpen(!isMenuOpen);
@@ -114,121 +99,69 @@ const Navbar = () => {
     setIsMenuOpen(false);
   };
 
-  const toggleSearch = () => {
-    setIsSearchOpen(!isSearchOpen);
-  };
-
-  const handleSearchSubmit = (e) => {
-    e.preventDefault();
-    // Handle search logic here
-    console.log('Searching for:', searchQuery);
-    setIsSearchOpen(false);
-  };
-
   const isActive = (path) => {
     return location.pathname === path;
   };
 
   return (
     <>
-      {/* Fixed Header with Logo, Search, and Toggle */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/98 backdrop-blur-md shadow-sm border-b border-gray-100">
-        <div className="container mx-auto px-6 lg:px-8 py-4">
-          <div className="flex items-center justify-between">
+      {/* Fixed Header with Logo and Menu Toggle */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200/80">
+        <div className="container mx-auto px-5 sm:px-6 lg:px-8 py-3 lg:py-3.5">
+          <div className="flex items-center justify-between gap-4">
             <Link
               to="/"
-              className="text-2xl lg:text-3xl font-bold text-primary-600 hover:text-primary-700 transition-colors duration-300 tracking-tight"
+              className="inline-flex items-center p-1.5 border-2 border-primary-800 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/40 focus-visible:ring-offset-2"
               onMouseEnter={(e) => {
-                gsap.to(e.target, { scale: 1.02, duration: 0.3, ease: 'power2.out' });
+                const img = e.currentTarget.querySelector('img');
+                if (img) gsap.to(img, { scale: 1.03, duration: 0.25, ease: 'power2.out' });
               }}
               onMouseLeave={(e) => {
-                gsap.to(e.target, { scale: 1, duration: 0.3, ease: 'power2.out' });
+                const img = e.currentTarget.querySelector('img');
+                if (img) gsap.to(img, { scale: 1, duration: 0.25, ease: 'power2.out' });
               }}
             >
-              Legaloids
+              <img
+                src="/Logo/Logo.png"
+                alt="Legaloids Law Offices"
+                className="h-11 sm:h-12 lg:h-14 w-auto object-contain select-none"
+              />
             </Link>
 
-            <div className="flex items-center gap-4">
-              {/* Search Button */}
-              <button
-                onClick={toggleSearch}
-                className="w-10 h-10 flex items-center justify-center text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-lg transition-all duration-300"
-                aria-label="Search"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-                </svg>
-              </button>
-
-              {/* Menu Toggle Button */}
+            <div className="flex items-center">
+              {/* Menu Toggle Button - red to match sidebar/logo */}
               <button
                 ref={toggleButtonRef}
                 onClick={toggleMenu}
-                className="relative z-50 w-11 h-11 flex items-center justify-center bg-primary-600 hover:bg-primary-700 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg"
+                className={`relative z-50 w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center rounded-lg transition-all duration-200 border-2 ${
+                  isMenuOpen
+                    ? 'bg-primary-800 border-primary-800 text-white'
+                    : 'bg-primary-800 border-primary-800 text-white hover:bg-primary-700 hover:border-primary-700'
+                }`}
                 aria-label="Toggle menu"
               >
-                <div className="w-6 h-6 relative">
+                <div className="w-5 h-5 relative">
                   <span
-                    className={`absolute top-0 left-0 w-full h-0.5 bg-white transition-all duration-300 ${
-                      isMenuOpen ? 'rotate-45 top-2.5' : ''
+                    className={`absolute left-0 w-full h-0.5 rounded-full bg-current transition-all duration-300 ${
+                      isMenuOpen ? 'rotate-45 top-[9px]' : 'top-0'
                     }`}
-                  ></span>
+                  />
                   <span
-                    className={`absolute top-2.5 left-0 w-full h-0.5 bg-white transition-all duration-300 ${
+                    className={`absolute left-0 top-[9px] w-full h-0.5 rounded-full bg-current transition-all duration-300 ${
                       isMenuOpen ? 'opacity-0' : ''
                     }`}
-                  ></span>
+                  />
                   <span
-                    className={`absolute top-5 left-0 w-full h-0.5 bg-white transition-all duration-300 ${
-                      isMenuOpen ? '-rotate-45 top-2.5' : ''
+                    className={`absolute left-0 w-full h-0.5 rounded-full bg-current transition-all duration-300 ${
+                      isMenuOpen ? '-rotate-45 top-[9px]' : 'top-[17px]'
                     }`}
-                  ></span>
+                  />
                 </div>
               </button>
             </div>
           </div>
         </div>
       </header>
-
-      {/* Search Overlay */}
-      {isSearchOpen && (
-        <div className="fixed inset-0 bg-black/60 z-[60] flex items-start justify-center pt-32 px-4 backdrop-blur-sm">
-          <div
-            ref={searchRef}
-            className="bg-white rounded-lg shadow-2xl w-full max-w-2xl p-8"
-          >
-            <form onSubmit={handleSearchSubmit} className="relative">
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search our website..."
-                className="w-full px-6 py-4 pr-14 text-base border border-gray-300 rounded-md focus:border-primary-600 focus:ring-2 focus:ring-primary-200 outline-none transition-all"
-                minLength={3}
-              />
-              <button
-                type="submit"
-                className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-primary-600 hover:bg-primary-700 text-white rounded-md flex items-center justify-center transition-colors"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-                </svg>
-              </button>
-            </form>
-            <div className="mt-6 text-xs text-gray-500 uppercase tracking-wider">
-              <p>Filters: All | People | Expertise | Insights | News</p>
-            </div>
-            <button
-              onClick={() => setIsSearchOpen(false)}
-              className="absolute top-6 right-6 w-8 h-8 flex items-center justify-center text-gray-400 hover:text-gray-700 transition-colors"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-          </div>
-        </div>
-      )}
 
       {/* Overlay */}
       <div
@@ -344,10 +277,10 @@ const Navbar = () => {
                   088816 68058
                 </a>
                 <a
-                  href="mailto:legaloids@gmail.com"
+                  href="mailto:admin@legaloids.com"
                   className="text-sm hover:text-white transition-colors duration-200 block"
                 >
-                  legaloids@gmail.com
+                  admin@legaloids.com
                 </a>
               </div>
             </div>
