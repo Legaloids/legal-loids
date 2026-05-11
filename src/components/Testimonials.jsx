@@ -73,13 +73,15 @@ const Testimonials = () => {
   }, [testimonials.length]);
 
   return (
-    <section ref={sectionRef} className="py-20 bg-gray-100">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900">What are the clients says</h2>
+    <section ref={sectionRef} className="py-12 sm:py-16 md:py-20 bg-gray-100">
+      <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
+        <div className="text-center mb-8 sm:mb-12 md:mb-16">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 px-2 break-words">
+            What are the clients says
+          </h2>
         </div>
-        <div className="max-w-4xl mx-auto">
-          <div ref={testimonialRef} className="bg-white p-8 md:p-12 rounded-2xl shadow-xl">
+        <div className="max-w-4xl mx-auto min-w-0">
+          <div ref={testimonialRef} className="bg-white p-5 sm:p-8 md:p-12 rounded-2xl shadow-xl">
             <div className="text-center">
               <div className="mb-6">
                 <PersonImage

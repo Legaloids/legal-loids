@@ -177,7 +177,7 @@ const Navbar = () => {
           isMenuOpen ? '' : 'pointer-events-none'
         }`}
       >
-        <div className="flex flex-col h-full p-10 pt-28">
+        <div className="flex flex-col h-full px-5 py-6 pt-24 sm:p-10 sm:pt-28">
           <ul className="space-y-1">
             {menuItems.map((item, index) => (
               <li
