@@ -23,18 +23,18 @@ const Attorneys = () => {
         'Lawyer and Company Secretary specializing in banking, corporate laws, fintech, securities, and taxation. With thorough expertise in corporate practices, he navigates modern business policies effectively.',
     },
     {
-      image: '/images/aj.png',
-      name: 'A.J. Ashish',
-      role: 'Senior Partner',
-      description:
-        'Advocate focusing on DRT, NCLT, consumer, recovery suits, corporate insolvency, and due diligence.',
-    },
-    {
       image: '/images/Anant.png',
       name: 'Anant Aggarwal',
-      role: 'Partner',
+      role: 'Senior Partner',
       description:
         'Advocate advising on corporate, commercial, and regulatory matters.',
+    },
+    {
+      image: '/images/aj.png',
+      name: 'A.J. Ashish',
+      role: 'Partner',
+      description:
+        'Advocate focusing on DRT, NCLT, consumer, recovery suits, corporate insolvency, and due diligence.',
     },
     {
       image: '',
