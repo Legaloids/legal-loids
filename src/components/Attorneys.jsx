@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { PersonImage } from './PersonImage';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -22,35 +23,42 @@ const Attorneys = () => {
         'Lawyer and Company Secretary specializing in banking, corporate laws, fintech, securities, and taxation. With thorough expertise in corporate practices, he navigates modern business policies effectively.',
     },
     {
-      image: '/images/user-2.jpg',
+      image: '/images/aj.png',
       name: 'A.J. Ashish',
       role: 'Senior Partner',
       description:
         'Advocate focusing on DRT, NCLT, consumer, recovery suits, corporate insolvency, and due diligence.',
     },
     {
-      image: '/images/user-3.jpg',
+      image: '/images/Anant.png',
+      name: 'Anant Aggarwal',
+      role: 'Partner',
+      description:
+        'Advocate advising on corporate, commercial, and regulatory matters.',
+    },
+    {
+      image: '',
       name: 'Pradeep Kumar Kulshrestha',
       role: 'Senior Partner',
       description:
         'Practicing advocate with 34 years in banking and civil matters; heads Agra associate branch, paneled with major banks.',
     },
     {
-      image: '/images/user-1.jpg',
+      image: '',
       name: 'Aishwarya Mohan Gahrana',
       role: 'Senior Partner',
       description:
         'Expert in corporate advisory and litigation.',
     },
     {
-      image: '/images/user-2.jpg',
+      image: '',
       name: 'Rajiv Kumar Shrivastava',
       role: 'Senior Partner',
       description:
         'Specializes in commercial and financial law.',
     },
     {
-      image: '/images/user-3.jpg',
+      image: '',
       name: 'Pallavi Tiwari',
       role: 'Associate Partner',
       description:
@@ -168,7 +176,7 @@ const Attorneys = () => {
             }}
           >
             <div ref={founderImgRef} className="relative overflow-hidden flex-shrink-0 w-full md:w-2/5 aspect-[4/5] md:aspect-auto md:min-h-[380px]">
-              <img
+              <PersonImage
                 src={founder.image}
                 alt={founder.name}
                 className="founder-img w-full h-full object-cover object-top will-change-transform"
@@ -194,19 +202,30 @@ const Attorneys = () => {
           </div>
         </div>
 
-        {/* Other people – name and description only, 3 per row */}
+        {/* Other attorneys – photo, name, role, and description */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6">
           {otherAttorneys.slice(0, isMobile ? 5 : otherAttorneys.length).map((attorney, index) => (
             <div
-              key={index}
-              ref={(el) => (cardsRef.current[index + 1] = el)}
-              className="bg-white rounded-xl shadow-md hover:shadow-xl p-4 sm:p-5 md:p-6 transition-shadow duration-300"
+              key={attorney.name}
+              ref={(el) => (cardsRef.current[index] = el)}
+              className="bg-white rounded-xl shadow-md hover:shadow-xl overflow-hidden transition-shadow duration-300"
               onMouseEnter={(e) => gsap.to(e.currentTarget, { y: -6, duration: 0.3, ease: 'power2.out' })}
               onMouseLeave={(e) => gsap.to(e.currentTarget, { y: 0, duration: 0.25, ease: 'power2.out' })}
             >
-              <h3 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 mb-2">{attorney.name}</h3>
-              <p className="text-primary-600 font-semibold text-sm sm:text-base mb-2">{attorney.role}</p>
-              <p className="text-sm text-gray-600">{attorney.description}</p>
+              <div className="relative w-full aspect-[4/5] max-h-80 sm:max-h-[22rem] overflow-hidden bg-gray-100">
+                <PersonImage
+                  src={attorney.image}
+                  alt={attorney.name}
+                  className="w-full h-full object-cover object-top"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div className="p-4 sm:p-5 md:p-6">
+                <h3 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 mb-2">{attorney.name}</h3>
+                <p className="text-primary-600 font-semibold text-sm sm:text-base mb-2">{attorney.role}</p>
+                <p className="text-sm text-gray-600">{attorney.description}</p>
+              </div>
             </div>
           ))}
         </div>

@@ -6,7 +6,7 @@ const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
 
 /**
  * Send contact form data via EmailJS.
- * @param {{ fname: string, lname: string, email: string, subject: string, message: string }} formData
+ * @param {{ fname: string, lname: string, email: string, phone: string, subject: string, message: string }} formData
  * @returns {Promise<void>}
  */
 export async function sendContactForm(formData) {
@@ -21,6 +21,8 @@ export async function sendContactForm(formData) {
   await emailjs.send(SERVICE_ID, TEMPLATE_ID, {
     from_name: `${formData.fname} ${formData.lname}`.trim(),
     from_email: formData.email,
+    phone: formData.phone ?? '',
+    from_phone: formData.phone ?? '',
     subject: formData.subject,
     message: formData.message,
     fname: formData.fname,

@@ -4,6 +4,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import IntroSection from '../components/IntroSection';
 import GoToTop from '../components/GoToTop';
+import { PersonImage } from '../components/PersonImage';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -266,7 +267,7 @@ const BlogSinglePage = () => {
 
               {/* Author */}
               <div className="bg-gray-50 p-6 rounded-xl">
-                <img src="/images/user-1.jpg" alt="Author" className="w-full h-auto rounded-lg mb-4" />
+                <PersonImage src="" alt="Author" className="w-full h-auto rounded-lg mb-4" />
                 <h3 className="text-xl font-bold text-gray-900 mb-3">About The Author</h3>
                 <p className="text-gray-600 mb-4">
                   Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.

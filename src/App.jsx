@@ -12,6 +12,7 @@ import ExpertisePage from './pages/ExpertisePage';
 import PeoplePage from './pages/PeoplePage';
 import NewsEventsPage from './pages/NewsEventsPage';
 import LegacyPage from './pages/LegacyPage';
+import ComplianceDeskPage from './pages/ComplianceDeskPage';
 
 function AppContent() {
   const location = useLocation();
@@ -70,6 +71,7 @@ function AppContent() {
           <Route path="/people" element={<PeoplePage />} />
           <Route path="/news-events" element={<NewsEventsPage />} />
           <Route path="/legacy" element={<LegacyPage />} />
+          <Route path="/compliance-desk" element={<ComplianceDeskPage />} />
         </Routes>
       </main>
 

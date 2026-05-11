@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { PersonImage } from './PersonImage';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -11,19 +12,19 @@ const Testimonials = () => {
 
   const testimonials = [
     {
-      image: '/images/user-1.jpg',
+      image: '',
       name: 'Carl Smith',
       quote:
         'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.',
     },
     {
-      image: '/images/user-2.jpg',
+      image: '',
       name: 'John Lockwood',
       quote:
         'Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.',
     },
     {
-      image: '/images/user-3.jpg',
+      image: '',
       name: 'Joyce Kroell',
       quote:
         'Far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.',
@@ -81,7 +82,7 @@ const Testimonials = () => {
           <div ref={testimonialRef} className="bg-white p-8 md:p-12 rounded-2xl shadow-xl">
             <div className="text-center">
               <div className="mb-6">
-                <img
+                <PersonImage
                   src={testimonials[currentTestimonial].image}
                   alt={testimonials[currentTestimonial].name}
                   className="w-24 h-24 rounded-full mx-auto object-cover border-4 border-primary-200 shadow-lg"

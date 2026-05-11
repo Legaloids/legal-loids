@@ -10,6 +10,7 @@ const ConsultationForm = () => {
     fname: '',
     lname: '',
     email: '',
+    phone: '',
     subject: '',
     message: '',
   });
@@ -79,6 +80,7 @@ const ConsultationForm = () => {
         fname: '',
         lname: '',
         email: '',
+        phone: '',
         subject: '',
         message: '',
       });
@@ -157,6 +159,22 @@ const ConsultationForm = () => {
               </div>
 
               <div ref={(el) => (inputsRef.current[3] = el)}>
+                <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-2">
+                  Phone
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  autoComplete="tel"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
+                  required
+                />
+              </div>
+
+              <div ref={(el) => (inputsRef.current[4] = el)}>
                 <label htmlFor="subject" className="block text-sm font-semibold text-gray-700 mb-2">
                   Subject
                 </label>
@@ -171,7 +189,7 @@ const ConsultationForm = () => {
                 />
               </div>
 
-              <div ref={(el) => (inputsRef.current[4] = el)}>
+              <div ref={(el) => (inputsRef.current[5] = el)}>
                 <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2">
                   Message
                 </label>

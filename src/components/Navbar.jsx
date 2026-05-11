@@ -17,6 +17,7 @@ const Navbar = () => {
     { label: 'News & Events', path: '/news-events' },
     { label: 'Legacy', path: '/legacy' },
     { label: 'Practice Areas', path: '/practice' },
+    { label: 'Compliance Desk', path: '/compliance-desk' },
     // {
     //   label: 'Blog',
     //   path: '/blog',
